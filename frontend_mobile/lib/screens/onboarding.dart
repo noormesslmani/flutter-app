@@ -14,21 +14,21 @@ class Onboarding extends StatelessWidget {
           fit: BoxFit.fitHeight,
           titleText: RichText(
             textAlign: TextAlign.center,
-            text: const TextSpan(
+            text: TextSpan(
               children: [
                 TextSpan(
                     text: "Welcome to ",
                     style: TextStyle(
-                        color: Color.fromRGBO(33, 76, 69, 1),
+                        color: Theme.of(context).primaryColorDark,
                         fontSize: 24.0,
                         fontWeight: FontWeight.w700)),
                 TextSpan(
                     text: "\nHappy Paws",
                     style: TextStyle(
-                        color: Color.fromRGBO(122, 188, 178, 1),
+                        color: Theme.of(context).primaryColor,
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold)),
-                TextSpan(
+                const TextSpan(
                   text:
                       "\nwith our app you'll make the life\n of your furry friend happier",
                   style: TextStyle(
@@ -46,22 +46,22 @@ class Onboarding extends StatelessWidget {
         fit: BoxFit.fitHeight,
         titleText: RichText(
           textAlign: TextAlign.center,
-          text: const TextSpan(
+          text: TextSpan(
             children: [
               TextSpan(
                   text: "Welcome to ",
                   style: TextStyle(
-                    color: Color.fromRGBO(33, 76, 69, 1),
+                    color: Theme.of(context).primaryColorDark,
                     fontWeight: FontWeight.w700,
                     fontSize: 24.0,
                   )),
               TextSpan(
                   text: "\nHappy Paws",
                   style: TextStyle(
-                      color: Color.fromRGBO(122, 188, 178, 1),
+                      color: Theme.of(context).primaryColor,
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold)),
-              TextSpan(
+              const TextSpan(
                 text:
                     "\nFind the best vetrenaries and \nservice providers within your area",
                 style: TextStyle(
@@ -80,22 +80,22 @@ class Onboarding extends StatelessWidget {
         fit: BoxFit.fitHeight,
         titleText: RichText(
           textAlign: TextAlign.center,
-          text: const TextSpan(
+          text: TextSpan(
             children: [
               TextSpan(
                   text: "Welcome to ",
                   style: TextStyle(
-                    color: Color.fromRGBO(33, 76, 69, 1),
+                    color: Theme.of(context).primaryColorDark,
                     fontWeight: FontWeight.w700,
                     fontSize: 24.0,
                   )),
               TextSpan(
                   text: "\nHappy Paws",
                   style: TextStyle(
-                      color: Color.fromRGBO(122, 188, 178, 1),
+                      color: Theme.of(context).primaryColor,
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold)),
-              TextSpan(
+              const TextSpan(
                 text: "\nWith Happy Paws, your pet is in safe hands",
                 style: TextStyle(
                   color: Colors.grey,
@@ -115,26 +115,28 @@ class Onboarding extends StatelessWidget {
       pageRoute: MaterialPageRoute(
         builder: (context) => SignIn(),
       ),
-      lastButton: const CircleAvatar(
-        backgroundColor: Color.fromRGBO(122, 188, 178, 1),
-        child: Icon(
+      lastButton: CircleAvatar(
+        backgroundColor: Theme.of(context).primaryColor,
+        child: const Icon(
           Icons.done,
           color: Colors.white,
         ),
       ),
-      nextButton: const CircleAvatar(
-        backgroundColor: Color.fromRGBO(122, 188, 178, 1),
-        child: Icon(
+      nextButton: CircleAvatar(
+        backgroundColor: Theme.of(context).primaryColor,
+        child: const Icon(
           Icons.arrow_forward,
           color: Colors.white,
         ),
       ),
-      skipButton: const Text(
+      skipButton: Text(
         "SKIP",
-        style: TextStyle(color: Color.fromRGBO(122, 188, 178, 1)),
+        style: TextStyle(
+          color: Theme.of(context).primaryColor,
+        ),
       ),
-      selectedDotColor: const Color.fromRGBO(33, 76, 69, 1),
-      unSelectdDotColor: Colors.grey,
+      selectedDotColor: Theme.of(context).colorScheme.secondary,
+      unSelectdDotColor: Theme.of(context).colorScheme.tertiary,
     );
   }
 }
