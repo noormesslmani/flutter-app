@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/screens/onboarding.dart';
+import 'package:frontend_mobile/tools/themes/light_mode.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: LightTheme().themeData,
       debugShowCheckedModeBanner: false,
-      home: Onboarding(),
+      home: const Onboarding(),
     );
   }
 }
