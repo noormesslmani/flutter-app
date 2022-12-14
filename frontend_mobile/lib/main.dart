@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/screens/onboarding.dart';
 import 'package:frontend_mobile/tools/themes/light_mode.dart';
-import 'package:frontend_mobile/screens/sign_in.dart';
+import 'package:frontend_mobile/screens/auth/Sign_in.dart';
 
 void main() {
   runApp(const MyApp());
