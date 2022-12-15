@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_walkthrough_screen/flutter_walkthrough_screen.dart';
-import 'sign_in.dart';
+import 'auth/Sign_in.dart';
 
 class Onboarding extends StatelessWidget {
   const Onboarding({super.key});
@@ -23,11 +23,9 @@ class Onboarding extends StatelessWidget {
                         fontSize: 24.0,
                         fontWeight: FontWeight.w700)),
                 TextSpan(
-                    text: "\nHappy Paws",
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold)),
+                  text: "\nHappy Paws",
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
                 const TextSpan(
                   text:
                       "\nwith our app you'll make the life\n of your furry friend happier",
@@ -56,11 +54,9 @@ class Onboarding extends StatelessWidget {
                     fontSize: 24.0,
                   )),
               TextSpan(
-                  text: "\nHappy Paws",
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold)),
+                text: "\nHappy Paws",
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const TextSpan(
                 text:
                     "\nFind the best vetrenaries and \nservice providers within your area",
@@ -90,11 +86,9 @@ class Onboarding extends StatelessWidget {
                     fontSize: 24.0,
                   )),
               TextSpan(
-                  text: "\nHappy Paws",
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold)),
+                text: "\nHappy Paws",
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const TextSpan(
                 text: "\nWith Happy Paws, your pet is in safe hands",
                 style: TextStyle(
