@@ -35,12 +35,19 @@ class _SignInState extends State<SignIn> {
             width: MediaQuery.of(context).size.width,
             child: const Image(
               image: AssetImage("assets/logo/logo.png"),
-              height: 120,
-              width: 100,
+              height: 140,
             ),
           ),
           const SizedBox(
             height: 50,
+          ),
+          Text(
+            'Welcome Back',
+            style: TextStyle(
+              fontSize: 24,
+              color: Theme.of(context).primaryColorDark,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -84,7 +91,16 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
+                  ),
+                  Text(
+                    "Don't have an account yet? Create One",
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   const AuthBottun(
                     label: 'Log In',
@@ -97,7 +113,7 @@ class _SignInState extends State<SignIn> {
           ClipPath(
             clipper: WaveClipperOne(reverse: true),
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.2,
+              height: MediaQuery.of(context).size.height * 0.16,
               width: MediaQuery.of(context).size.width,
               color: Theme.of(context).primaryColorLight,
             ),
