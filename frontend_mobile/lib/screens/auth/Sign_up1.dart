@@ -91,7 +91,7 @@ class _SignUp1State extends State<SignUp1> {
                           text: 'Log In',
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              debugPrint('register');
+                              Navigator.pop(context);
                             },
                           style: TextStyle(
                               fontWeight: FontWeight.w700,
