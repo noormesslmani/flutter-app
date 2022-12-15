@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class AuthBottun extends StatefulWidget {
   final String label;
   final double width;
+  final void Function()? handlePress;
   const AuthBottun({
     required this.label,
     required this.width,
+    required this.handlePress,
     super.key,
   });
 
@@ -22,12 +24,12 @@ class _AuthBottunState extends State<AuthBottun> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: widget.handlePress,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          minimumSize: Size(widget.width, 60),
+          minimumSize: Size(widget.width, 50),
           backgroundColor: Theme.of(context).primaryColor,
         ),
         child: Text(
