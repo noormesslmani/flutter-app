@@ -38,7 +38,7 @@ class _SignInState extends State<SignIn> {
             width: MediaQuery.of(context).size.width,
             child: const Image(
               image: AssetImage("assets/logo/logo.png"),
-              height: 140,
+              height: 120,
             ),
           ),
           const SizedBox(
@@ -121,6 +121,7 @@ class _SignInState extends State<SignIn> {
                   const AuthBottun(
                     label: 'Log In',
                     width: double.infinity,
+                    handlePress: null,
                   ),
                 ],
               ),
