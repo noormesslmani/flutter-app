@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:frontend_mobile/screens/auth/Sign_up2.dart';
 
 class SignUp1 extends StatefulWidget {
   const SignUp1({super.key});
@@ -17,12 +18,14 @@ class _SignUp1State extends State<SignUp1> {
   final _formKey = GlobalKey<FormState>();
   late FocusNode nameFocusNode;
   late FocusNode dobFocusNode;
+  late FocusNode phoneFocusNode;
 
   @override
   void initState() {
     super.initState();
     nameFocusNode = FocusNode();
     dobFocusNode = FocusNode();
+    phoneFocusNode = FocusNode();
   }
 
   @override
@@ -36,7 +39,7 @@ class _SignUp1State extends State<SignUp1> {
             width: MediaQuery.of(context).size.width,
             child: const Image(
               image: AssetImage("assets/logo/logo.png"),
-              height: 140,
+              height: 120,
             ),
           ),
           const SizedBox(
@@ -82,6 +85,19 @@ class _SignUp1State extends State<SignUp1> {
                   const SizedBox(
                     height: 10,
                   ),
+                  Input(
+                    prefixIcon: const Icon(
+                      Icons.phone_android,
+                      color: Colors.grey,
+                    ),
+                    label: 'Phone',
+                    focusNode: phoneFocusNode,
+                    suffixIcon: null,
+                    obscureText: false,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   RichText(
                     text: TextSpan(
                       text: "Already have an account? ",
@@ -100,9 +116,17 @@ class _SignUp1State extends State<SignUp1> {
                       ],
                     ),
                   ),
-                  const AuthBottun(
+                  AuthBottun(
                     label: 'Next',
                     width: 160,
+                    handlePress: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignUp2(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -126,7 +150,7 @@ class _SignUp1State extends State<SignUp1> {
   void dispose() {
     nameFocusNode.dispose();
     dobFocusNode.dispose();
-
+    phoneFocusNode.dispose();
     super.dispose();
   }
 }
