@@ -5,6 +5,7 @@ import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up1.dart';
+import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -30,19 +31,13 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: ReusableWidgets.getAppBar('Log In', false),
       backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: const Image(
-              image: AssetImage("assets/logo/logo.png"),
-              height: 120,
-            ),
-          ),
-          const SizedBox(
-            height: 50,
+            height: MediaQuery.of(context).size.height * 0.2,
           ),
           Text(
             'Welcome Back',

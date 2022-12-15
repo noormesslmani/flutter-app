@@ -4,6 +4,7 @@ import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up2.dart';
+import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 
 class SignUp1 extends StatefulWidget {
   const SignUp1({super.key});
@@ -31,19 +32,13 @@ class _SignUp1State extends State<SignUp1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: ReusableWidgets.getAppBar('Sign Up', false),
       backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: const Image(
-              image: AssetImage("assets/logo/logo.png"),
-              height: 120,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
+            height: MediaQuery.of(context).size.height * 0.2,
           ),
           Text(
             'Create an account',

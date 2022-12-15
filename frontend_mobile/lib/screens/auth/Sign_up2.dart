@@ -4,6 +4,7 @@ import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up3.dart';
+import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 
 class SignUp2 extends StatefulWidget {
   const SignUp2({super.key});
@@ -33,18 +34,12 @@ class _SignUp2State extends State<SignUp2> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: ReusableWidgets.getAppBar('Sign Up', true),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: const Image(
-              image: AssetImage("assets/logo/logo.png"),
-              height: 120,
-            ),
-          ),
-          const SizedBox(
-            height: 30,
+            height: MediaQuery.of(context).size.height * 0.2,
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
