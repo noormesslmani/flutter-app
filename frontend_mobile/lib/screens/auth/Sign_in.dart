@@ -1,7 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:flutter/gestures.dart';
+import 'package:frontend_mobile/screens/auth/Sign_up1.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -44,9 +47,9 @@ class _SignInState extends State<SignIn> {
           Text(
             'Welcome Back',
             style: TextStyle(
-              fontSize: 24,
-              color: Theme.of(context).primaryColorDark,
-              fontWeight: FontWeight.w700,
+              fontSize: 26,
+              color: Colors.grey[800],
+              fontWeight: FontWeight.w500,
             ),
           ),
           Padding(
@@ -93,17 +96,31 @@ class _SignInState extends State<SignIn> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    "Don't have an account yet? Create One",
-                    style: TextStyle(
-                      fontSize: 14,
+                  RichText(
+                    text: TextSpan(
+                      text: "Don't have an account yet? ",
+                      style: const TextStyle(fontSize: 14, color: Colors.black),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Create One',
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignUp1()),
+                              );
+                            },
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: Theme.of(context).colorScheme.secondary),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
                   ),
                   const AuthBottun(
                     label: 'Log In',
+                    width: double.infinity,
                   ),
                 ],
               ),
@@ -113,7 +130,7 @@ class _SignInState extends State<SignIn> {
           ClipPath(
             clipper: WaveClipperOne(reverse: true),
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.16,
+              height: MediaQuery.of(context).size.height * 0.15,
               width: MediaQuery.of(context).size.width,
               color: Theme.of(context).primaryColorLight,
             ),
