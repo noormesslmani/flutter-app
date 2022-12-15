@@ -103,17 +103,21 @@ class _SignInState extends State<SignIn> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const SignUp1()),
+                                  builder: (context) => const SignUp1(),
+                                ),
                               );
                             },
                           style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: Theme.of(context).colorScheme.secondary),
+                            fontWeight: FontWeight.w700,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  const AuthBottun(
+                  const AuthButton(
                     label: 'Log In',
                     width: double.infinity,
                     handlePress: null,
@@ -122,13 +126,16 @@ class _SignInState extends State<SignIn> {
               ),
             ),
           ),
-          const Spacer(),
-          ClipPath(
-            clipper: WaveClipperOne(reverse: true),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.15,
-              width: MediaQuery.of(context).size.width,
-              color: Theme.of(context).primaryColorLight,
+          SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: ClipPath(
+              clipper: WaveClipperOne(reverse: true),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                color: Theme.of(context).primaryColorLight,
+              ),
             ),
           ),
         ],

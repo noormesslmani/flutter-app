@@ -9,8 +9,17 @@ class LightTheme {
     focusColor: const Color.fromRGBO(122, 188, 178, 1),
     errorColor: const Color.fromARGB(255, 195, 29, 26),
     colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: const Color.fromRGBO(242, 158, 146, 1),
+      secondaryContainer: const Color.fromRGBO(242, 158, 146, 1),
+      secondary: const Color.fromRGBO(240, 199, 200, 1),
       tertiary: Colors.grey[400],
+    ),
+    cardTheme: const CardTheme(
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color.fromRGBO(122, 188, 178, 1),

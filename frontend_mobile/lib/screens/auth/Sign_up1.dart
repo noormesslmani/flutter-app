@@ -105,13 +105,16 @@ class _SignUp1State extends State<SignUp1> {
                               Navigator.pop(context);
                             },
                           style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: Theme.of(context).colorScheme.secondary),
+                            fontWeight: FontWeight.w700,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  AuthBottun(
+                  AuthButton(
                     label: 'Next',
                     width: 160,
                     handlePress: () {
@@ -127,13 +130,13 @@ class _SignUp1State extends State<SignUp1> {
               ),
             ),
           ),
-          const Spacer(),
-          ClipPath(
-            clipper: WaveClipperOne(reverse: true),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.15,
-              width: MediaQuery.of(context).size.width,
-              color: Theme.of(context).primaryColorLight,
+          Expanded(
+            child: ClipPath(
+              clipper: WaveClipperOne(reverse: true),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                color: Theme.of(context).primaryColorLight,
+              ),
             ),
           ),
         ],

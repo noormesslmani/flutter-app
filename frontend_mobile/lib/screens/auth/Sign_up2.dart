@@ -100,7 +100,7 @@ class _SignUp2State extends State<SignUp2> {
                   const SizedBox(
                     height: 10,
                   ),
-                  AuthBottun(
+                  AuthButton(
                     label: 'Next',
                     width: 160,
                     handlePress: () {
@@ -116,13 +116,13 @@ class _SignUp2State extends State<SignUp2> {
               ),
             ),
           ),
-          const Spacer(),
-          ClipPath(
-            clipper: WaveClipperOne(reverse: true),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.15,
-              width: MediaQuery.of(context).size.width,
-              color: Theme.of(context).primaryColorLight,
+          Expanded(
+            child: ClipPath(
+              clipper: WaveClipperOne(reverse: true),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                color: Theme.of(context).primaryColorLight,
+              ),
             ),
           ),
         ],
