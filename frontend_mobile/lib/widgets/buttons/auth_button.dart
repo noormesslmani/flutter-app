@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class AuthBottun extends StatefulWidget {
   final String label;
-
+  final double width;
   const AuthBottun({
     required this.label,
+    required this.width,
     super.key,
   });
 
@@ -26,10 +27,10 @@ class _AuthBottunState extends State<AuthBottun> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          minimumSize: const Size(double.infinity, 60),
+          minimumSize: Size(widget.width, 60),
           backgroundColor: Theme.of(context).primaryColor,
         ),
-        child:  Text(
+        child: Text(
           widget.label,
           style: const TextStyle(
             fontSize: 16,
