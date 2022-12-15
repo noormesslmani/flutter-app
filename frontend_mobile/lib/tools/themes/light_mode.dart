@@ -12,12 +12,17 @@ class LightTheme {
       secondary: const Color.fromRGBO(242, 158, 146, 1),
       tertiary: Colors.grey[400],
     ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Color.fromRGBO(122, 188, 178, 1),
+      centerTitle: true,
+    ),
     fontFamily: 'Inter',
     textTheme: const TextTheme(
       titleLarge: TextStyle(
-          fontSize: 30,
-          fontFamily: 'FredokaOne',
-          color: Color.fromRGBO(122, 188, 178, 1)),
+        fontSize: 22,
+        fontFamily: 'Inter',
+        fontWeight: FontWeight.bold,
+      ),
     ),
   );
 
