@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:frontend_mobile/screens/auth/Sign_up3.dart';
 
 class SignUp2 extends StatefulWidget {
   const SignUp2({super.key});
@@ -104,10 +105,17 @@ class _SignUp2State extends State<SignUp2> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const AuthBottun(
+                  AuthBottun(
                     label: 'Next',
                     width: 160,
-                    handlePress: null,
+                    handlePress: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUp3(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
