@@ -39,15 +39,18 @@ class _SignUp1State extends State<SignUp1> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery.of(context).size.height * 0.15,
           ),
           Text(
-            'Create an account',
+            'Personal Information',
             style: TextStyle(
               fontSize: 26,
               color: Colors.grey[800],
               fontWeight: FontWeight.w500,
             ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -154,6 +157,9 @@ class _SignUp1State extends State<SignUp1> {
                 ],
               ),
             ),
+          ),
+          const SizedBox(
+            height: 50,
           ),
           Expanded(
             child: ClipPath(

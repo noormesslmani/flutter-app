@@ -35,7 +35,7 @@ class _TypeCardState extends State<TypeCard> {
               children: [
                 SizedBox(
                   height: 100,
-                  width: 150,
+                  width: 120,
                   child: Image(
                     image: widget.image,
                   ),
@@ -45,7 +45,7 @@ class _TypeCardState extends State<TypeCard> {
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 24,
+                    fontSize: 20,
                   ),
                 ),
               ],

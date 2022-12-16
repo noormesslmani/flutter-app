@@ -42,7 +42,18 @@ class _SignUp2State extends State<SignUp2> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery.of(context).size.height * 0.15,
+          ),
+          Text(
+            'Account Information',
+            style: TextStyle(
+              fontSize: 26,
+              color: Colors.grey[800],
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -153,6 +164,9 @@ class _SignUp2State extends State<SignUp2> {
                 ],
               ),
             ),
+          ),
+          const SizedBox(
+            height: 50,
           ),
           Expanded(
             child: ClipPath(

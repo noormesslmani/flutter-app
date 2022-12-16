@@ -31,7 +31,7 @@ class _SignUp3State extends State<SignUp3> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.15,
                 ),
                 Text(
                   'You are...?',
@@ -41,8 +41,8 @@ class _SignUp3State extends State<SignUp3> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
                 ),
                 TypeCard(
                   type: 'Pet Owner',
@@ -80,6 +80,9 @@ class _SignUp3State extends State<SignUp3> {
                 ),
               ],
             ),
+          ),
+          const SizedBox(
+            height: 50,
           ),
           Expanded(
             child: ClipPath(

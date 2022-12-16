@@ -10,8 +10,8 @@ class Onboarding extends StatelessWidget {
     final List<OnbordingData> list = [
       OnbordingData(
           image: const AssetImage("assets/images/splash1.png"),
-          imageHeight: MediaQuery.of(context).size.height * 0.6,
-          fit: BoxFit.fitHeight,
+          imageWidth: MediaQuery.of(context).size.width,
+          fit: BoxFit.contain,
           titleText: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -40,8 +40,8 @@ class Onboarding extends StatelessWidget {
           descText: const SizedBox.shrink()),
       OnbordingData(
         image: const AssetImage("assets/images/splash2.png"),
-        imageHeight: MediaQuery.of(context).size.height * 0.5,
-        fit: BoxFit.fitHeight,
+        imageWidth: MediaQuery.of(context).size.width,
+        fit: BoxFit.contain,
         titleText: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
@@ -72,8 +72,8 @@ class Onboarding extends StatelessWidget {
       ),
       OnbordingData(
         image: const AssetImage("assets/images/splash3.png"),
-        imageHeight: MediaQuery.of(context).size.height * 0.5,
-        fit: BoxFit.fitHeight,
+        imageWidth: MediaQuery.of(context).size.width,
+        fit: BoxFit.contain,
         titleText: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
