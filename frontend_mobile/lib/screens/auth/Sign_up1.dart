@@ -19,9 +19,7 @@ class _SignUp1State extends State<SignUp1> {
   late FocusNode nameFocusNode;
   late FocusNode dobFocusNode;
   late FocusNode phoneFocusNode;
-  String name = '';
-  String dob = '';
-  int? phone;
+  final _user = <String, Object>{};
   @override
   void initState() {
     super.initState();
@@ -71,13 +69,12 @@ class _SignUp1State extends State<SignUp1> {
                     focusNode: nameFocusNode,
                     suffixIcon: null,
                     obscureText: false,
-                    setData: (text) {
+                    setData: (value) {
                       setState(
                         () {
-                          name = text;
+                          _user['name'] = value;
                         },
                       );
-                      debugPrint(name);
                     },
                   ),
                   const SizedBox(
@@ -114,7 +111,13 @@ class _SignUp1State extends State<SignUp1> {
                     focusNode: phoneFocusNode,
                     suffixIcon: null,
                     obscureText: false,
-                    setData: null,
+                    setData: (value) {
+                      setState(
+                        () {
+                          _user['phone'] = value;
+                        },
+                      );
+                    },
                   ),
                   const SizedBox(
                     height: 10,
@@ -145,12 +148,8 @@ class _SignUp1State extends State<SignUp1> {
                     width: 160,
                     handlePress: (() {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignUp2(),
-                          ),
-                        );
+                        Navigator.of(context)
+                            .pushNamed("/signup2", arguments: _user);
                       }
                     }),
                   ),

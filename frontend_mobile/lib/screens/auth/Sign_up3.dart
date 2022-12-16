@@ -7,9 +7,6 @@ import 'package:frontend_mobile/widgets/cards/user_type.dart';
 
 class SignUp3 extends StatefulWidget {
   const SignUp3({super.key});
-
-  static const routeName = '/login';
-
   @override
   State<SignUp3> createState() => _SignUp3State();
 }
@@ -19,6 +16,8 @@ class _SignUp3State extends State<SignUp3> {
 
   @override
   Widget build(BuildContext context) {
+    final _user =
+        ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: ReusableWidgets.getAppBar('User Type', true),
@@ -51,6 +50,7 @@ class _SignUp3State extends State<SignUp3> {
                   onTap: () {
                     setState(() {
                       _userType = 'owner';
+                      _user['type'] = 'owner';
                     });
                   },
                   opacity: _userType == 'owner' ? 1 : 0.4,
@@ -65,18 +65,23 @@ class _SignUp3State extends State<SignUp3> {
                   onTap: () {
                     setState(() {
                       _userType = 'provider';
+                      _user['type'] = 'provider';
                     });
-                    debugPrint(_userType);
                   },
                   opacity: _userType == 'provider' ? 1 : 0.4,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const AuthButton(
+                AuthButton(
                   label: 'Create Account',
                   width: double.infinity,
-                  handlePress: null,
+                  handlePress: () {
+                    _user.forEach((key, value) {
+                      debugPrint(key);
+                      debugPrint(value as String);
+                    });
+                  },
                 ),
               ],
             ),

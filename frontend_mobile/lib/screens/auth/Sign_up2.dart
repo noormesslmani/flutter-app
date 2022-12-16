@@ -10,8 +10,6 @@ import 'package:frontend_mobile/utilities/validators.dart';
 class SignUp2 extends StatefulWidget {
   const SignUp2({super.key});
 
-  static const routeName = '/login';
-
   @override
   State<SignUp2> createState() => _SignUp2State();
 }
@@ -22,9 +20,7 @@ class _SignUp2State extends State<SignUp2> {
   late FocusNode passwordFocusNode;
   late FocusNode confirmPasswordFocusNode;
   late bool _passwordObscureText = true;
-  String email = '';
-  String password = '';
-  String confirmedPassword = '';
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +31,8 @@ class _SignUp2State extends State<SignUp2> {
 
   @override
   Widget build(BuildContext context) {
+    final _user =
+        ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: ReusableWidgets.getAppBar('Sign Up', true),
@@ -69,7 +67,7 @@ class _SignUp2State extends State<SignUp2> {
                     setData: (value) {
                       setState(
                         () {
-                          email = value;
+                          _user['email'] = value;
                         },
                       );
                     },
@@ -93,7 +91,7 @@ class _SignUp2State extends State<SignUp2> {
                     setData: (value) {
                       setState(
                         () {
-                          password = value;
+                          _user['password'] = value;
                         },
                       );
                     },
@@ -126,15 +124,10 @@ class _SignUp2State extends State<SignUp2> {
                   Input(
                     keyboardType: TextInputType.text,
                     validator: (value) {
-                      return Validator.confirmPassowrd(value!, password);
+                      return Validator.confirmPassowrd(
+                          value!, _user['password'] as String);
                     },
-                    setData: (value) {
-                      setState(
-                        () {
-                          confirmedPassword = value;
-                        },
-                      );
-                    },
+                    setData: null,
                     prefixIcon: const Icon(
                       Icons.lock,
                       color: Colors.grey,
@@ -152,12 +145,13 @@ class _SignUp2State extends State<SignUp2> {
                     width: 160,
                     handlePress: (() {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignUp3(),
-                          ),
+                        setState(
+                          () {
+                            _user['type'] = 'owner';
+                          },
                         );
+                        Navigator.of(context)
+                            .pushNamed("/signup3", arguments: _user);
                       }
                     }),
                   ),
