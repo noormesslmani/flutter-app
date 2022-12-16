@@ -8,6 +8,7 @@ class Input extends StatefulWidget {
   final bool obscureText;
   final void Function(String)? setData;
   final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
   const Input(
       {required this.prefixIcon,
       required this.label,
@@ -16,6 +17,7 @@ class Input extends StatefulWidget {
       required this.obscureText,
       required this.setData,
       required this.validator,
+      required this.keyboardType,
       super.key});
 
   @override
@@ -27,6 +29,7 @@ class _InputState extends State<Input> {
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: widget.focusNode,
+      keyboardType: widget.keyboardType,
       onTap: () => {
         setState(() {
           FocusScope.of(context).requestFocus(widget.focusNode);
