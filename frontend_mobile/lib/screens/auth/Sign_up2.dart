@@ -5,6 +5,7 @@ import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up3.dart';
 import 'package:frontend_mobile/widgets/reusable_widgets.dart';
+import 'package:frontend_mobile/utilities/validators.dart';
 
 class SignUp2 extends StatefulWidget {
   const SignUp2({super.key});
@@ -21,7 +22,9 @@ class _SignUp2State extends State<SignUp2> {
   late FocusNode passwordFocusNode;
   late FocusNode confirmPasswordFocusNode;
   late bool _passwordObscureText = true;
-
+  String email = '';
+  String password = '';
+  String confirmedPassword = '';
   @override
   void initState() {
     super.initState();
@@ -48,6 +51,16 @@ class _SignUp2State extends State<SignUp2> {
               child: Column(
                 children: [
                   Input(
+                    validator: (value) {
+                      return Validator.validateEmail(value!);
+                    },
+                    setData: (value) {
+                      setState(
+                        () {
+                          email = value;
+                        },
+                      );
+                    },
                     prefixIcon: const Icon(
                       Icons.email,
                       color: Colors.grey,
@@ -61,6 +74,16 @@ class _SignUp2State extends State<SignUp2> {
                     height: 10,
                   ),
                   Input(
+                    validator: (value) {
+                      return Validator.validatePassword(value!);
+                    },
+                    setData: (value) {
+                      setState(
+                        () {
+                          password = value;
+                        },
+                      );
+                    },
                     prefixIcon: const Icon(
                       Icons.lock,
                       color: Colors.grey,
@@ -88,6 +111,16 @@ class _SignUp2State extends State<SignUp2> {
                     height: 10,
                   ),
                   Input(
+                    validator: (value) {
+                      return Validator.confirmPassowrd(value!, password);
+                    },
+                    setData: (value) {
+                      setState(
+                        () {
+                          confirmedPassword = value;
+                        },
+                      );
+                    },
                     prefixIcon: const Icon(
                       Icons.lock,
                       color: Colors.grey,
@@ -103,14 +136,16 @@ class _SignUp2State extends State<SignUp2> {
                   AuthButton(
                     label: 'Next',
                     width: 160,
-                    handlePress: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignUp3(),
-                        ),
-                      );
-                    },
+                    handlePress: (() {
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUp3(),
+                          ),
+                        );
+                      }
+                    }),
                   ),
                 ],
               ),

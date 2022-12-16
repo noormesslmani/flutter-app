@@ -5,6 +5,7 @@ import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up2.dart';
 import 'package:frontend_mobile/widgets/reusable_widgets.dart';
+import 'package:frontend_mobile/utilities/validators.dart';
 
 class SignUp1 extends StatefulWidget {
   const SignUp1({super.key});
@@ -20,6 +21,7 @@ class _SignUp1State extends State<SignUp1> {
   late FocusNode nameFocusNode;
   late FocusNode dobFocusNode;
   late FocusNode phoneFocusNode;
+  String name = '';
 
   @override
   void initState() {
@@ -55,6 +57,9 @@ class _SignUp1State extends State<SignUp1> {
               child: Column(
                 children: [
                   Input(
+                    validator: (value) {
+                      return Validator.validateInput(value!);
+                    },
                     prefixIcon: const Icon(
                       Icons.person,
                       color: Colors.grey,
@@ -63,11 +68,22 @@ class _SignUp1State extends State<SignUp1> {
                     focusNode: nameFocusNode,
                     suffixIcon: null,
                     obscureText: false,
+                    setData: (text) {
+                      setState(
+                        () {
+                          name = text;
+                        },
+                      );
+                      debugPrint(name);
+                    },
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Input(
+                    validator: (value) {
+                      return Validator.validateInput(value!);
+                    },
                     prefixIcon: const Icon(
                       Icons.cake,
                       color: Colors.grey,
@@ -76,11 +92,15 @@ class _SignUp1State extends State<SignUp1> {
                     focusNode: dobFocusNode,
                     suffixIcon: null,
                     obscureText: false,
+                    setData: null,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Input(
+                    validator: (value) {
+                      return Validator.validateInput(value!);
+                    },
                     prefixIcon: const Icon(
                       Icons.phone_android,
                       color: Colors.grey,
@@ -89,6 +109,7 @@ class _SignUp1State extends State<SignUp1> {
                     focusNode: phoneFocusNode,
                     suffixIcon: null,
                     obscureText: false,
+                    setData: null,
                   ),
                   const SizedBox(
                     height: 10,
@@ -117,14 +138,16 @@ class _SignUp1State extends State<SignUp1> {
                   AuthButton(
                     label: 'Next',
                     width: 160,
-                    handlePress: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignUp2(),
-                        ),
-                      );
-                    },
+                    handlePress: (() {
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUp2(),
+                          ),
+                        );
+                      }
+                    }),
                   ),
                 ],
               ),
