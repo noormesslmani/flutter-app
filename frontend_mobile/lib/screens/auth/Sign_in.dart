@@ -6,6 +6,7 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up1.dart';
 import 'package:frontend_mobile/widgets/reusable_widgets.dart';
+import 'package:frontend_mobile/utilities/validators.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -21,6 +22,8 @@ class _SignInState extends State<SignIn> {
   late FocusNode emailFocusNode;
   late FocusNode passwordFocusNode;
   late bool _passwordObscureText = true;
+  String email = '';
+  String password = '';
   @override
   void initState() {
     super.initState();
@@ -54,6 +57,17 @@ class _SignInState extends State<SignIn> {
               child: Column(
                 children: [
                   Input(
+                    setData: (value) {
+                      setState(
+                        () {
+                          email = value;
+                        },
+                      );
+                      debugPrint(email);
+                    },
+                    validator: (value) {
+                      return Validator.validateEmail(value!);
+                    },
                     prefixIcon: const Icon(
                       Icons.email,
                       color: Colors.grey,
@@ -67,6 +81,17 @@ class _SignInState extends State<SignIn> {
                     height: 20,
                   ),
                   Input(
+                    setData: (text) {
+                      setState(
+                        () {
+                          password = text;
+                        },
+                      );
+                      debugPrint(password);
+                    },
+                    validator: (value) {
+                      return Validator.validatePassword(value!);
+                    },
                     prefixIcon: const Icon(
                       Icons.lock,
                       color: Colors.grey,
@@ -117,16 +142,22 @@ class _SignInState extends State<SignIn> {
                       ],
                     ),
                   ),
-                  const AuthButton(
+                  AuthButton(
                     label: 'Log In',
                     width: double.infinity,
-                    handlePress: null,
+                    handlePress: (() {
+                      if (_formKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        );
+                      }
+                    }),
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
