@@ -33,8 +33,8 @@ dependencies:
     sdk: flutter
     
   flutter_walkthrough_screen:
-
   flutter_custom_clippers: ^2.0.0
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
