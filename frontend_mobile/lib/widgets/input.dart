@@ -7,6 +7,7 @@ class Input extends StatefulWidget {
   final String label;
   final bool obscureText;
   final void Function(String)? setData;
+  final String? Function(String?)? validator;
   const Input(
       {required this.prefixIcon,
       required this.label,
@@ -14,6 +15,7 @@ class Input extends StatefulWidget {
       required this.suffixIcon,
       required this.obscureText,
       required this.setData,
+      required this.validator,
       super.key});
 
   @override
@@ -31,6 +33,7 @@ class _InputState extends State<Input> {
         }),
       },
       onChanged: widget.setData,
+      validator: widget.validator,
       obscureText: widget.obscureText,
       decoration: InputDecoration(
         border: OutlineInputBorder(
