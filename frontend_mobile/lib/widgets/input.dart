@@ -6,12 +6,14 @@ class Input extends StatefulWidget {
   final IconButton? suffixIcon;
   final String label;
   final bool obscureText;
+  final void Function(String)? setData;
   const Input(
       {required this.prefixIcon,
       required this.label,
       required this.focusNode,
       required this.suffixIcon,
       required this.obscureText,
+      required this.setData,
       super.key});
 
   @override
@@ -28,6 +30,7 @@ class _InputState extends State<Input> {
           FocusScope.of(context).requestFocus(widget.focusNode);
         }),
       },
+      onChanged: widget.setData,
       obscureText: widget.obscureText,
       decoration: InputDecoration(
         border: OutlineInputBorder(
