@@ -10,8 +10,6 @@ import 'package:frontend_mobile/utilities/validators.dart';
 class SignUp1 extends StatefulWidget {
   const SignUp1({super.key});
 
-  static const routeName = '/login';
-
   @override
   State<SignUp1> createState() => _SignUp1State();
 }
@@ -22,7 +20,8 @@ class _SignUp1State extends State<SignUp1> {
   late FocusNode dobFocusNode;
   late FocusNode phoneFocusNode;
   String name = '';
-
+  String dob = '';
+  int? phone;
   @override
   void initState() {
     super.initState();
@@ -60,6 +59,7 @@ class _SignUp1State extends State<SignUp1> {
                     validator: (value) {
                       return Validator.validateInput(value!);
                     },
+                    keyboardType: TextInputType.text,
                     prefixIcon: const Icon(
                       Icons.person,
                       color: Colors.grey,
@@ -84,6 +84,7 @@ class _SignUp1State extends State<SignUp1> {
                     validator: (value) {
                       return Validator.validateInput(value!);
                     },
+                    keyboardType: TextInputType.text,
                     prefixIcon: const Icon(
                       Icons.cake,
                       color: Colors.grey,
@@ -98,6 +99,7 @@ class _SignUp1State extends State<SignUp1> {
                     height: 10,
                   ),
                   Input(
+                    keyboardType: TextInputType.number,
                     validator: (value) {
                       return Validator.validateInput(value!);
                     },

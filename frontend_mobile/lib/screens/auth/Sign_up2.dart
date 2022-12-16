@@ -51,6 +51,7 @@ class _SignUp2State extends State<SignUp2> {
               child: Column(
                 children: [
                   Input(
+                    keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       return Validator.validateEmail(value!);
                     },
@@ -74,6 +75,7 @@ class _SignUp2State extends State<SignUp2> {
                     height: 10,
                   ),
                   Input(
+                    keyboardType: TextInputType.text,
                     validator: (value) {
                       return Validator.validatePassword(value!);
                     },
@@ -111,6 +113,7 @@ class _SignUp2State extends State<SignUp2> {
                     height: 10,
                   ),
                   Input(
+                    keyboardType: TextInputType.text,
                     validator: (value) {
                       return Validator.confirmPassowrd(value!, password);
                     },

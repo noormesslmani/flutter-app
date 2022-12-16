@@ -57,6 +57,7 @@ class _SignInState extends State<SignIn> {
               child: Column(
                 children: [
                   Input(
+                    keyboardType: TextInputType.emailAddress,
                     setData: (value) {
                       setState(
                         () {
@@ -81,6 +82,7 @@ class _SignInState extends State<SignIn> {
                     height: 20,
                   ),
                   Input(
+                    keyboardType: TextInputType.text,
                     setData: (text) {
                       setState(
                         () {
