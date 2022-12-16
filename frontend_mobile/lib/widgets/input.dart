@@ -9,6 +9,8 @@ class Input extends StatefulWidget {
   final void Function(String)? setData;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
+  final void Function()? ontap;
+  final TextEditingController? controller;
   const Input(
       {required this.prefixIcon,
       required this.label,
@@ -18,6 +20,8 @@ class Input extends StatefulWidget {
       required this.setData,
       required this.validator,
       required this.keyboardType,
+      this.ontap,
+      this.controller,
       super.key});
 
   @override
@@ -30,11 +34,13 @@ class _InputState extends State<Input> {
     return TextFormField(
       focusNode: widget.focusNode,
       keyboardType: widget.keyboardType,
-      onTap: () => {
+      controller: widget.controller,
+      onTap: widget.ontap ?? () => {
         setState(() {
           FocusScope.of(context).requestFocus(widget.focusNode);
         }),
       },
+      readOnly: widget.label == 'Date of birth' ? true : false,
       onChanged: widget.setData,
       validator: widget.validator,
       obscureText: widget.obscureText,
