@@ -6,6 +6,7 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up2.dart';
 import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 import 'package:frontend_mobile/utilities/validators.dart';
+import 'package:intl/intl.dart';
 
 class SignUp1 extends StatefulWidget {
   const SignUp1({super.key});
@@ -20,6 +21,7 @@ class _SignUp1State extends State<SignUp1> {
   late FocusNode dobFocusNode;
   late FocusNode phoneFocusNode;
   final _user = <String, Object>{};
+  TextEditingController controller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -90,9 +92,26 @@ class _SignUp1State extends State<SignUp1> {
                       color: Colors.grey,
                     ),
                     label: 'Date of birth',
+                    controller: controller,
                     focusNode: dobFocusNode,
                     suffixIcon: null,
                     obscureText: false,
+                    ontap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(), //get today's date
+                        firstDate: DateTime(1910),
+                        lastDate: DateTime.now(),
+                      );
+                      if (pickedDate != null) {
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                        setState(() {
+                          _user['dob'] = formattedDate;
+                          controller.text = formattedDate;
+                        });
+                      }
+                    },
                     setData: null,
                   ),
                   const SizedBox(
