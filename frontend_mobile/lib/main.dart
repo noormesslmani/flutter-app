@@ -7,9 +7,11 @@ import 'package:frontend_mobile/screens/auth/Sign_up2.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up3.dart';
 import 'package:frontend_mobile/screens/tabs.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import './providers/auth.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: "assets/.env");
   runApp(const MyApp());
 }
 
