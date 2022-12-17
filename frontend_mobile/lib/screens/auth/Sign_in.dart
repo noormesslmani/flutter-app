@@ -7,6 +7,9 @@ import 'package:flutter/gestures.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up1.dart';
 import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 import 'package:frontend_mobile/utilities/validators.dart';
+import 'package:frontend_mobile/services/auth_service.dart';
+import 'package:frontend_mobile/providers/auth.dart';
+import 'package:frontend_mobile/utilities/exceptions.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -29,6 +32,18 @@ class _SignInState extends State<SignIn> {
     super.initState();
     emailFocusNode = FocusNode();
     passwordFocusNode = FocusNode();
+  }
+
+  Future signIn(email, password, context) async {
+    //Try logging in
+    try {
+      await AuthService().login(email, password, context);
+      Navigator.pushNamedAndRemoveUntil(context, "/tabs", (route) => false);
+    } on HttpException catch (error) {
+      debugPrint(error.toString());
+    } catch (error) {
+      debugPrint(error.toString());
+    }
   }
 
   @override
@@ -149,9 +164,7 @@ class _SignInState extends State<SignIn> {
                     width: double.infinity,
                     handlePress: (() {
                       if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
+                        signIn(email, password, context);
                       }
                     }),
                   ),
