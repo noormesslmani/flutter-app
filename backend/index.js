@@ -19,7 +19,7 @@ const authRoutes = require('./routes/auth.routes');
 app.use('/auth', authRoutes) //path extension for auth
 
 //port is in env
-app.listen(process.env.PORT, (err)=>{
+app.listen(process.env.PORT,process.env.IP_ADDRESS,(err)=>{
     if(err) throw err;
     console.log(`server running on port ${process.env.PORT}`);
 })
