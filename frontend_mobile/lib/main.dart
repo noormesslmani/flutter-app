@@ -5,7 +5,7 @@ import 'package:frontend_mobile/screens/auth/Sign_in.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up1.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up2.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up3.dart';
-
+import 'package:frontend_mobile/screens/tabs.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         "/signup1": (context) => SignUp1(),
         "/signup2": (context) => SignUp2(),
         "/signup3": (context) => SignUp3(),
+        "/tabs": (context) => Tabs(),
       },
     );
   }
