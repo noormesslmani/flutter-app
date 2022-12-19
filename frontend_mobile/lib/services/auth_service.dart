@@ -32,4 +32,36 @@ class AuthService with ChangeNotifier {
       rethrow;
     }
   }
+
+  Future<void> signUp(Map<String, Object> user, context) async {
+    try {
+      final url = Uri.http(Requests.url, '/auth/signup');
+      final response = await http.post(url,
+          body: json.encode({
+            'name': user['name'],
+            'email': user['email'],
+            'password': user['password'],
+            'dob': user['dob'],
+            'phone': int.parse(user['phone'].toString().trim().substring(1)),
+            'user_type': user['type'],
+            'country': user['country'].toString()
+          }),
+          headers: Requests().getHeaders(context));
+      final data = json.decode(response.body);
+
+      if (response.statusCode != 200) {
+        throw HttpException(data["message"]);
+      }
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("token", data["token"]);
+
+      Auth().setToken(data["token"]);
+      Auth().setUser(data['user']);
+      notifyListeners();
+      debugPrint(data["user"]["email"]);
+    } catch (error) {
+      rethrow;
+    }
+  }
 }
