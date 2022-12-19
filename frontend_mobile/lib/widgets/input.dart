@@ -5,7 +5,7 @@ class Input extends StatefulWidget {
   final Icon prefixIcon;
   final IconButton? suffixIcon;
   final String label;
-  final bool obscureText;
+  final bool? obscureText;
   final void Function(String)? setData;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
@@ -15,11 +15,11 @@ class Input extends StatefulWidget {
       {required this.prefixIcon,
       required this.label,
       required this.focusNode,
-      required this.suffixIcon,
-      required this.obscureText,
-      required this.setData,
+      this.suffixIcon,
+      this.obscureText,
+      this.setData,
       required this.validator,
-      required this.keyboardType,
+      this.keyboardType,
       this.ontap,
       this.controller,
       super.key});
@@ -33,17 +33,20 @@ class _InputState extends State<Input> {
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: widget.focusNode,
-      keyboardType: widget.keyboardType,
+      keyboardType: widget.keyboardType ?? TextInputType.text,
       controller: widget.controller,
-      onTap: widget.ontap ?? () => {
-        setState(() {
-          FocusScope.of(context).requestFocus(widget.focusNode);
-        }),
-      },
-      readOnly: widget.label == 'Date of birth' ? true : false,
+      onTap: widget.ontap ??
+          () => {
+                setState(() {
+                  FocusScope.of(context).requestFocus(widget.focusNode);
+                }),
+              },
+      readOnly: widget.label == 'Date of birth' || widget.label == 'Country'
+          ? true
+          : false,
       onChanged: widget.setData,
       validator: widget.validator,
-      obscureText: widget.obscureText,
+      obscureText: widget.obscureText ?? false,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

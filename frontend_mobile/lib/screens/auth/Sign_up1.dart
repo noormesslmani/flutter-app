@@ -68,15 +68,12 @@ class _SignUp1State extends State<SignUp1> {
                     validator: (value) {
                       return Validator.validateInput(value!);
                     },
-                    keyboardType: TextInputType.text,
                     prefixIcon: const Icon(
                       Icons.person,
                       color: Colors.grey,
                     ),
                     label: 'Full Name',
                     focusNode: nameFocusNode,
-                    suffixIcon: null,
-                    obscureText: false,
                     setData: (value) {
                       setState(
                         () {
@@ -92,7 +89,6 @@ class _SignUp1State extends State<SignUp1> {
                     validator: (value) {
                       return Validator.validateInput(value!);
                     },
-                    keyboardType: TextInputType.text,
                     prefixIcon: const Icon(
                       Icons.cake,
                       color: Colors.grey,
@@ -100,8 +96,6 @@ class _SignUp1State extends State<SignUp1> {
                     label: 'Date of birth',
                     controller: dobController,
                     focusNode: dobFocusNode,
-                    suffixIcon: null,
-                    obscureText: false,
                     ontap: () async {
                       DateTime? pickedDate = await showDatePicker(
                         context: context,
@@ -125,7 +119,6 @@ class _SignUp1State extends State<SignUp1> {
                   ),
                   Input(
                     controller: countryController,
-                    keyboardType: TextInputType.text,
                     validator: (value) {
                       return Validator.validateInput(value!);
                     },
@@ -135,8 +128,6 @@ class _SignUp1State extends State<SignUp1> {
                     ),
                     label: 'Country',
                     focusNode: countryFocusNode,
-                    suffixIcon: null,
-                    obscureText: false,
                     ontap: () {
                       showCountryPicker(
                         context: context,

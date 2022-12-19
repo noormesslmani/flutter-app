@@ -77,14 +77,11 @@ class _SignUp2State extends State<SignUp2> {
                     ),
                     label: 'Email',
                     focusNode: emailFocusNode,
-                    suffixIcon: null,
-                    obscureText: false,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Input(
-                    keyboardType: TextInputType.text,
                     validator: (value) {
                       return Validator.validatePassword(value!);
                     },
@@ -122,7 +119,6 @@ class _SignUp2State extends State<SignUp2> {
                     height: 10,
                   ),
                   Input(
-                    keyboardType: TextInputType.text,
                     validator: (value) {
                       return Validator.confirmPassowrd(
                           value!, _user['password'] as String);
@@ -134,7 +130,6 @@ class _SignUp2State extends State<SignUp2> {
                     ),
                     label: 'confirm Password',
                     focusNode: confirmPasswordFocusNode,
-                    suffixIcon: null,
                     obscureText: true,
                   ),
                   const SizedBox(
