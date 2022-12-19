@@ -7,6 +7,8 @@ import 'package:frontend_mobile/screens/auth/Sign_up2.dart';
 import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 import 'package:frontend_mobile/utilities/validators.dart';
 import 'package:intl/intl.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:country_picker/country_picker.dart';
 
 class SignUp1 extends StatefulWidget {
   const SignUp1({super.key});
@@ -20,14 +22,18 @@ class _SignUp1State extends State<SignUp1> {
   late FocusNode nameFocusNode;
   late FocusNode dobFocusNode;
   late FocusNode phoneFocusNode;
+  late FocusNode countryFocusNode;
+
   final _user = <String, Object>{};
-  TextEditingController controller = TextEditingController();
+  TextEditingController dobController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
   @override
   void initState() {
     super.initState();
     nameFocusNode = FocusNode();
     dobFocusNode = FocusNode();
     phoneFocusNode = FocusNode();
+    countryFocusNode = FocusNode();
   }
 
   @override
@@ -39,7 +45,7 @@ class _SignUp1State extends State<SignUp1> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
+            height: MediaQuery.of(context).size.height * 0.06,
           ),
           Text(
             'Personal Information',
@@ -92,7 +98,7 @@ class _SignUp1State extends State<SignUp1> {
                       color: Colors.grey,
                     ),
                     label: 'Date of birth',
-                    controller: controller,
+                    controller: dobController,
                     focusNode: dobFocusNode,
                     suffixIcon: null,
                     obscureText: false,
@@ -108,7 +114,7 @@ class _SignUp1State extends State<SignUp1> {
                             DateFormat('yyyy-MM-dd').format(pickedDate);
                         setState(() {
                           _user['dob'] = formattedDate;
-                          controller.text = formattedDate;
+                          dobController.text = formattedDate;
                         });
                       }
                     },
@@ -118,28 +124,72 @@ class _SignUp1State extends State<SignUp1> {
                     height: 10,
                   ),
                   Input(
-                    keyboardType: TextInputType.number,
+                    controller: countryController,
+                    keyboardType: TextInputType.text,
                     validator: (value) {
                       return Validator.validateInput(value!);
                     },
                     prefixIcon: const Icon(
-                      Icons.phone_android,
+                      Icons.flag,
                       color: Colors.grey,
                     ),
-                    label: 'Phone',
-                    focusNode: phoneFocusNode,
+                    label: 'Country',
+                    focusNode: countryFocusNode,
                     suffixIcon: null,
                     obscureText: false,
-                    setData: (value) {
-                      setState(
-                        () {
-                          _user['phone'] = value;
+                    ontap: () {
+                      showCountryPicker(
+                        context: context,
+                        showPhoneCode:
+                            false, // optional. Shows phone code before the country name.
+                        onSelect: (Country country) {
+                          countryController.text = country.name.toString();
+                          setState(
+                            () {
+                              _user['country'] = country.name.toString();
+                            },
+                          );
                         },
                       );
                     },
                   ),
                   const SizedBox(
                     height: 10,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: IntlPhoneField(
+                      validator: (value) {
+                        return Validator.validateInput(value!.toString());
+                      },
+                      focusNode: phoneFocusNode,
+                      decoration: InputDecoration(
+                        labelText: 'Phone Number',
+                        labelStyle: TextStyle(
+                          color: phoneFocusNode.hasFocus
+                              ? Theme.of(context).primaryColorDark
+                              : Colors.grey,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Theme.of(context).focusColor,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).focusColor,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                      initialCountryCode: 'LB',
+                      onChanged: (phone) {
+                        debugPrint(phone.completeNumber.toString());
+                      },
+                    ),
                   ),
                   RichText(
                     text: TextSpan(
@@ -167,6 +217,7 @@ class _SignUp1State extends State<SignUp1> {
                     width: 160,
                     handlePress: (() {
                       if (_formKey.currentState!.validate()) {
+                        debugPrint(_user['country'].toString());
                         Navigator.of(context)
                             .pushNamed("/signup2", arguments: _user);
                       }
@@ -177,7 +228,7 @@ class _SignUp1State extends State<SignUp1> {
             ),
           ),
           const SizedBox(
-            height: 50,
+            height: 10,
           ),
           Expanded(
             child: ClipPath(
