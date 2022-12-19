@@ -77,7 +77,7 @@ class _SignUp1State extends State<SignUp1> {
                     setData: (value) {
                       setState(
                         () {
-                          _user['name'] = value;
+                          _user['name'] = value.toString();
                         },
                       );
                     },
@@ -107,7 +107,7 @@ class _SignUp1State extends State<SignUp1> {
                         String formattedDate =
                             DateFormat('yyyy-MM-dd').format(pickedDate);
                         setState(() {
-                          _user['dob'] = formattedDate;
+                          _user['dob'] = formattedDate.toString();
                           dobController.text = formattedDate;
                         });
                       }
@@ -178,7 +178,13 @@ class _SignUp1State extends State<SignUp1> {
                       ),
                       initialCountryCode: 'LB',
                       onChanged: (phone) {
-                        debugPrint(phone.completeNumber.toString());
+                        setState(
+                          () {
+                            _user['phone'] = phone.completeNumber.toString();
+                          },
+                        );
+                        debugPrint(
+                            phone.completeNumber.toString().substring(1));
                       },
                     ),
                   ),

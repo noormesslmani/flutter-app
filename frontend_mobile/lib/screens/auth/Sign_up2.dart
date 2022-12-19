@@ -67,7 +67,7 @@ class _SignUp2State extends State<SignUp2> {
                     setData: (value) {
                       setState(
                         () {
-                          _user['email'] = value;
+                          _user['email'] = value.toString();
                         },
                       );
                     },
@@ -88,7 +88,7 @@ class _SignUp2State extends State<SignUp2> {
                     setData: (value) {
                       setState(
                         () {
-                          _user['password'] = value;
+                          _user['password'] = value.toString();
                         },
                       );
                     },
