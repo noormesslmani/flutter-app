@@ -4,6 +4,8 @@ import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 import 'package:frontend_mobile/widgets/cards/user_type.dart';
+import 'package:frontend_mobile/services/auth_service.dart';
+import 'package:frontend_mobile/utilities/exceptions.dart';
 
 class SignUp3 extends StatefulWidget {
   const SignUp3({super.key});
@@ -13,6 +15,16 @@ class SignUp3 extends StatefulWidget {
 
 class _SignUp3State extends State<SignUp3> {
   String _userType = 'owner';
+  Future signUp(_user, context) async {
+    try {
+      await AuthService().signUp(_user, context);
+      Navigator.pushNamedAndRemoveUntil(context, "/tabs", (route) => false);
+    } on HttpException catch (error) {
+      debugPrint(error.toString());
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,12 +88,9 @@ class _SignUp3State extends State<SignUp3> {
                 AuthButton(
                   label: 'Create Account',
                   width: double.infinity,
-                  handlePress: () {
-                    _user.forEach((key, value) {
-                      debugPrint(key);
-                      debugPrint(value as String);
-                    });
-                  },
+                  handlePress: (() {
+                    signUp(_user, context);
+                  }),
                 ),
               ],
             ),
