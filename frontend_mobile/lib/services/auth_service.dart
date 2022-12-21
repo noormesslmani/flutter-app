@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import '../utilities/requests.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:frontend_mobile/providers/auth.dart';
+import 'package:provider/provider.dart';
 
 class AuthService with ChangeNotifier {
   Future<void> login(String email, String password, context) async {
@@ -24,8 +25,8 @@ class AuthService with ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("token", data["token"]);
 
-      Auth().setToken(data["token"]);
-      Auth().setUser(data['user']);
+      Provider.of<Auth>(context, listen: false).setUser(data['user']);
+      Provider.of<Auth>(context, listen: false).setToken(data["token"]);
       notifyListeners();
       debugPrint(data["user"]["email"]);
     } catch (error) {
@@ -56,8 +57,8 @@ class AuthService with ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("token", data["token"]);
 
-      Auth().setToken(data["token"]);
-      Auth().setUser(data['user']);
+      Provider.of<Auth>(context, listen: false).setUser(data['user']);
+      Provider.of<Auth>(context, listen: false).setToken(data["token"]);
       notifyListeners();
       debugPrint(data["user"]["email"]);
     } catch (error) {
