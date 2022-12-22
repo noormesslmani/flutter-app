@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend_mobile/screens/home/home.dart';
 import 'package:frontend_mobile/screens/home/profile.dart';
 import 'package:frontend_mobile/screens/home/chats.dart';
+import 'package:frontend_mobile/screens/home/favorites.dart';
 import 'package:frontend_mobile/screens/home/notification.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:frontend_mobile/widgets/reusable_widgets.dart';
@@ -18,9 +19,10 @@ class _TabsState extends State<Tabs> {
   String title = 'Home';
   final pages = [
     const Home(),
+    const Favorites(),
     const Chats(),
-    const Profile(),
     const Notifications(),
+    const Profile(),
   ];
 
   void _onItemTapped(int index) {
@@ -39,12 +41,19 @@ class _TabsState extends State<Tabs> {
       case 1:
         {
           setState(() {
+            title = 'Favorites';
+          });
+        }
+        break;
+      case 2:
+        {
+          setState(() {
             title = 'Chats';
           });
         }
         break;
 
-      case 2:
+      case 3:
         {
           setState(() {
             title = 'Notifications';
@@ -52,7 +61,7 @@ class _TabsState extends State<Tabs> {
         }
         break;
 
-      case 3:
+      case 4:
         {
           setState(() {
             title = 'Profile';
@@ -73,6 +82,10 @@ class _TabsState extends State<Tabs> {
           items: const [
             TabItem(
               icon: Icons.home,
+              title: '',
+            ),
+            TabItem(
+              icon: Icons.favorite,
               title: '',
             ),
             TabItem(
