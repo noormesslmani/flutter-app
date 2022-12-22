@@ -5,6 +5,7 @@ import 'package:frontend_mobile/screens/home/profile.dart';
 import 'package:frontend_mobile/screens/home/chats.dart';
 import 'package:frontend_mobile/screens/home/notification.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 
 class Tabs extends StatefulWidget {
   const Tabs({super.key});
@@ -14,6 +15,7 @@ class Tabs extends StatefulWidget {
 
 class _TabsState extends State<Tabs> {
   int _selectedIndex = 0;
+  String title = 'Home';
   final pages = [
     const Home(),
     const Chats(),
@@ -25,11 +27,45 @@ class _TabsState extends State<Tabs> {
     setState(() {
       _selectedIndex = index;
     });
+    switch (index) {
+      case 0:
+        {
+          setState(() {
+            title = 'Home';
+          });
+        }
+        break;
+
+      case 1:
+        {
+          setState(() {
+            title = 'Chats';
+          });
+        }
+        break;
+
+      case 2:
+        {
+          setState(() {
+            title = 'Notifications';
+          });
+        }
+        break;
+
+      case 3:
+        {
+          setState(() {
+            title = 'Profile';
+          });
+        }
+        break;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: ReusableWidgets.getAppBar(title, false),
         bottomNavigationBar: ConvexAppBar(
           backgroundColor: Theme.of(context).primaryColor,
           initialActiveIndex: _selectedIndex,
