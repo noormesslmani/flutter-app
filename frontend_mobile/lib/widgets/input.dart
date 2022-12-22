@@ -18,7 +18,7 @@ class Input extends StatefulWidget {
       this.suffixIcon,
       this.obscureText,
       this.setData,
-      required this.validator,
+      this.validator,
       this.keyboardType,
       this.ontap,
       this.controller,
