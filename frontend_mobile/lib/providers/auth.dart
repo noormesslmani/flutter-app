@@ -12,7 +12,7 @@ class Auth with ChangeNotifier {
     return null;
   }
 
-  Map<String, Object?>? get getUser {
+  Map<String, dynamic>? get getUser {
     return _user;
   }
 
