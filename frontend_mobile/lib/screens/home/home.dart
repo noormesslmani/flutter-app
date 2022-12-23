@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/input.dart';
-import 'package:frontend_mobile/widgets/cards/service_card.dart';
+import 'package:frontend_mobile/widgets/cards/service_type_card.dart';
 import 'package:frontend_mobile/utilities/serviceCard.dart';
 import 'package:frontend_mobile/widgets/cards/vet_card.dart';
+import 'package:frontend_mobile/widgets/cards/service_provider_card.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -92,7 +93,7 @@ class _HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Nearby",
+                "Top Rated",
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               GestureDetector(
@@ -107,16 +108,29 @@ class _HomeState extends State<Home> {
             ],
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              itemCount: 4,
-              itemBuilder: (BuildContext context, int index) {
-                return const VetCard();
-              },
-            ),
+            child: selectedService == 'Veterinary'
+                ? ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    itemCount: 4,
+                    itemBuilder: (BuildContext context, int index) {
+                      return const VetCard();
+                    },
+                  )
+                : GridView.count(
+                    crossAxisCount: 2,
+                    children: List.generate(
+                      4,
+                      (index) {
+                        return const Padding(
+                          padding: EdgeInsets.all(3),
+                          child: ServiceProviderCard(),
+                        );
+                      },
+                    ),
+                  ),
           )
         ],
       ),
