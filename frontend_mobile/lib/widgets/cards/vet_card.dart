@@ -6,7 +6,7 @@ class VetCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 120,
       child: Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(
@@ -28,8 +28,8 @@ class VetCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 100,
-                    width: 60,
+                    height: 120,
+                    width: 80,
                     child: Image.asset(
                       "assets/images/vet.jpg",
                     ),
@@ -47,11 +47,35 @@ class VetCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(
-                            Icons.location_pin,
-                            color: Theme.of(context).colorScheme.secondary,
+                          Row(
+                            children: [
+                              Text(
+                                '4',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellowAccent[700],
+                                size: 20,
+                              ),
+                            ],
                           ),
-                          const Text('5 Km')
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.location_pin,
+                                color: Theme.of(context).colorScheme.secondary,
+                                size: 20,
+                              ),
+                              Text(
+                                '5 Km',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              )
+                            ],
+                          ),
                         ],
                       )
                     ],
