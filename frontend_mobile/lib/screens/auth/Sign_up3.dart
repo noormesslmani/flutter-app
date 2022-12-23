@@ -1,11 +1,10 @@
-import 'package:flutter/gestures.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 import 'package:frontend_mobile/widgets/cards/user_type.dart';
 import 'package:frontend_mobile/services/auth_service.dart';
-import 'package:frontend_mobile/utilities/exceptions.dart';
 
 class SignUp3 extends StatefulWidget {
   const SignUp3({super.key});
@@ -15,20 +14,10 @@ class SignUp3 extends StatefulWidget {
 
 class _SignUp3State extends State<SignUp3> {
   String _userType = 'owner';
-  Future signUp(_user, context) async {
-    try {
-      await AuthService().signUp(_user, context);
-      Navigator.pushNamedAndRemoveUntil(context, "/tabs", (route) => false);
-    } on HttpException catch (error) {
-      debugPrint(error.toString());
-    } catch (error) {
-      debugPrint(error.toString());
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    final _user =
+    final user =
         ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -62,7 +51,7 @@ class _SignUp3State extends State<SignUp3> {
                   onTap: () {
                     setState(() {
                       _userType = 'owner';
-                      _user['type'] = 'owner';
+                      user['type'] = 'owner';
                     });
                   },
                   opacity: _userType == 'owner' ? 1 : 0.4,
@@ -77,7 +66,7 @@ class _SignUp3State extends State<SignUp3> {
                   onTap: () {
                     setState(() {
                       _userType = 'provider';
-                      _user['type'] = 'provider';
+                      user['type'] = 'provider';
                     });
                   },
                   opacity: _userType == 'provider' ? 1 : 0.4,
@@ -89,7 +78,19 @@ class _SignUp3State extends State<SignUp3> {
                   label: 'Create Account',
                   width: double.infinity,
                   handlePress: (() {
-                    signUp(_user, context);
+                    AuthService().signUpWithFireBase(
+                      user['email'].toString(),
+                      user['password'].toString(),
+                      () {
+                        if (!mounted) return;
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          "/verifyEmail",
+                          arguments: user,
+                          (route) => false,
+                        );
+                      },
+                    );
                   }),
                 ),
               ],
