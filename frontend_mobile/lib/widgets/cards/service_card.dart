@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ServiceCard extends StatefulWidget {
+class ServiceCard extends StatelessWidget {
   final double opacity;
   final String image;
 
@@ -10,11 +10,6 @@ class ServiceCard extends StatefulWidget {
     super.key,
   });
 
-  @override
-  State<ServiceCard> createState() => _ServiceCardState();
-}
-
-class _ServiceCardState extends State<ServiceCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -30,13 +25,14 @@ class _ServiceCardState extends State<ServiceCard> {
         child: SizedBox(
           height: 60,
           child: Opacity(
-            opacity: widget.opacity,
+            opacity: opacity,
             child: Image.asset(
-              widget.image,
+              image,
             ),
           ),
         ),
       ),
     );
+    ;
   }
 }
