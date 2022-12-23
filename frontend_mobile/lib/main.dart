@@ -9,9 +9,16 @@ import 'package:frontend_mobile/screens/tabs.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import './providers/auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:frontend_mobile/screens/auth/Email_verification.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "assets/.env");
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -33,11 +40,12 @@ class MyApp extends StatelessWidget {
           home: const Onboarding(),
           routes: {
             "/onboarding": (context) => const Onboarding(),
-            "/signin": (context) => SignIn(),
-            "/signup1": (context) => SignUp1(),
-            "/signup2": (context) => SignUp2(),
-            "/signup3": (context) => SignUp3(),
-            "/tabs": (context) => Tabs(),
+            "/signin": (context) => const SignIn(),
+            "/signup1": (context) => const SignUp1(),
+            "/signup2": (context) => const SignUp2(),
+            "/signup3": (context) => const SignUp3(),
+            "/verifyEmail": (context) => const VerifyEmail(),
+            "/tabs": (context) => const Tabs(),
           },
         ),
       ),
