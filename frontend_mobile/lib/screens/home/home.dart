@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
                           selectedInd = index;
                         });
                       },
-                      child: ServiceCard(
+                      child: ServiceTypeCard(
                         opacity: selectedInd == index ? 1 : 0.5,
                         image: ServiceCardUtilities.images[index],
                       ),

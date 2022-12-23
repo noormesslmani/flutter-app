@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ServiceCard extends StatelessWidget {
+class ServiceTypeCard extends StatelessWidget {
   final double opacity;
   final String image;
 
-  const ServiceCard({
+  const ServiceTypeCard({
     required this.opacity,
     required this.image,
     super.key,
