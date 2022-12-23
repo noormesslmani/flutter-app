@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/cards/service_card.dart';
 import 'package:frontend_mobile/utilities/serviceCard.dart';
+import 'package:frontend_mobile/widgets/cards/vet_card.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -73,7 +74,7 @@ class _HomeState extends State<Home> {
                       height: 5,
                     ),
                     Opacity(
-                      opacity: selectedInd == index ? 1 : 0.5,
+                      opacity: selectedInd == index ? 1 : 0.3,
                       child: Text(
                         ServiceCardUtilities.titles[index],
                       ),
@@ -83,6 +84,40 @@ class _HomeState extends State<Home> {
               },
             ),
           ),
+          const SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Nearby",
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              GestureDetector(
+                child: Text(
+                  "View All",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .apply(color: Colors.grey),
+                ),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              itemCount: 4,
+              itemBuilder: (BuildContext context, int index) {
+                return const VetCard();
+              },
+            ),
+          )
         ],
       ),
     );
