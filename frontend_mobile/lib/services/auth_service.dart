@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../utilities/requests.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:frontend_mobile/providers/auth.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService with ChangeNotifier {
+  bool isEmailVerified = false;
+  Timer? timer;
   Future<void> login(String email, String password, context) async {
     try {
       final url = Uri.http(Requests.url, '/auth/login');
@@ -63,6 +65,21 @@ class AuthService with ChangeNotifier {
       debugPrint(data["user"]["email"]);
     } catch (error) {
       rethrow;
+    }
+  }
+
+  Future<void> signUpWithFireBase(
+      String email, String password, VoidCallback onSuccess) async {
+    try {
+      final newUser =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      await newUser.user!.sendEmailVerification();
+      onSuccess.call();
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.message);
     }
   }
 }
