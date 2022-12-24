@@ -35,7 +35,7 @@ class _SignUp2State extends State<SignUp2> {
         ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: ReusableWidgets.getAppBar('Sign Up', true),
+      appBar: ReusableWidgets.getAppBar('Sign Up', true, null),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

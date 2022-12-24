@@ -39,7 +39,7 @@ class _SignUp1State extends State<SignUp1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ReusableWidgets.getAppBar('Sign Up', false),
+      appBar: ReusableWidgets.getAppBar('Sign Up', false, null),
       backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

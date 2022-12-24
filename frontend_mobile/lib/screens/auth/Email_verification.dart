@@ -67,7 +67,7 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ReusableWidgets.getAppBar('Email Verification', false),
+      appBar: ReusableWidgets.getAppBar('Email Verification', false, null),
       body: const Center(
         child:
             Text('A Verification email has been sent, please check your inbox'),
