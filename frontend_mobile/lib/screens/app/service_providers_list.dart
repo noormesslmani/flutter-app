@@ -43,53 +43,70 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
             vertical: 20,
             horizontal: 10,
           ),
-          child: Column(
-            children: [
-              Input(
-                setData: (text) {
-                  setState(
-                    () {
-                      searchQuery = text;
-                    },
-                  );
-                  debugPrint(searchQuery);
-                },
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: Colors.grey,
-                ),
-                label: 'Search',
-                focusNode: searchFocusNode,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: selectedService == 'Veterinary'
-                    ? ListView.builder(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        itemCount: 10,
-                        itemBuilder: (BuildContext context, int index) {
-                          return const Padding(
-                            padding: EdgeInsets.all(3.0),
-                            child: VetCard(),
+          child: Expanded(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: Input(
+                        setData: (text) {
+                          setState(
+                            () {
+                              searchQuery = text;
+                            },
                           );
+                          debugPrint(searchQuery);
                         },
-                      )
-                    : GridView.count(
-                        crossAxisCount: 2,
-                        children: List.generate(
-                          10,
-                          (index) {
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Colors.grey,
+                        ),
+                        label: 'Search',
+                        focusNode: searchFocusNode,
+                      ),
+                    ),
+                    GestureDetector(
+                      child: Icon(
+                        Icons.filter_list,
+                        size: 35,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: selectedService == 'Veterinary'
+                      ? ListView.builder(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          itemCount: 10,
+                          itemBuilder: (BuildContext context, int index) {
                             return const Padding(
-                              padding: EdgeInsets.all(5),
-                              child: ServiceProviderCard(),
+                              padding: EdgeInsets.all(3.0),
+                              child: VetCard(),
                             );
                           },
+                        )
+                      : GridView.count(
+                          crossAxisCount: 2,
+                          children: List.generate(
+                            10,
+                            (index) {
+                              return const Padding(
+                                padding: EdgeInsets.all(5),
+                                child: ServiceProviderCard(),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-              ),
-            ],
+                ),
+              ],
+            ),
           )),
     );
   }
