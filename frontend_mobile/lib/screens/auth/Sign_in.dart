@@ -10,6 +10,7 @@ import 'package:frontend_mobile/utilities/validators.dart';
 import 'package:frontend_mobile/services/auth_service.dart';
 import 'package:frontend_mobile/providers/auth.dart';
 import 'package:frontend_mobile/utilities/exceptions.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -34,22 +35,38 @@ class _SignInState extends State<SignIn> {
     passwordFocusNode = FocusNode();
   }
 
-  Future signIn(email, password, context) async {
+  Future signIn(String email, String password, BuildContext context) async {
     //Try logging in
     try {
       await AuthService().login(email, password, context);
-      Navigator.pushNamedAndRemoveUntil(context, "/tabs", (route) => false);
+
+      if (mounted &&
+          Provider.of<Auth>(
+                context,
+                listen: false,
+              ).getUser!['user_type'].toString() ==
+              'owner') {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          "/tabs",
+          (route) => false,
+        );
+      }
     } on HttpException catch (error) {
-      debugPrint(error.toString());
+      debugPrint(
+        error.toString(),
+      );
     } catch (error) {
-      debugPrint(error.toString());
+      debugPrint(
+        error.toString(),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ReusableWidgets.getAppBar('Log In', false),
+      appBar: ReusableWidgets.getAppBar('Log In', false, null),
       backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,7 +96,6 @@ class _SignInState extends State<SignIn> {
                           email = value;
                         },
                       );
-                      debugPrint(email);
                     },
                     validator: (value) {
                       return Validator.validateEmail(value!);
@@ -104,7 +120,6 @@ class _SignInState extends State<SignIn> {
                           password = text;
                         },
                       );
-                      debugPrint(password);
                     },
                     validator: (value) {
                       return Validator.validatePassword(value!);

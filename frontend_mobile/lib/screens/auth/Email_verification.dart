@@ -4,6 +4,8 @@ import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 import 'package:frontend_mobile/services/auth_service.dart';
 import 'package:frontend_mobile/utilities/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:frontend_mobile/providers/auth.dart';
 
 class VerifyEmail extends StatefulWidget {
   const VerifyEmail({super.key});
@@ -33,7 +35,12 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
                 context,
               );
             }
-            if (mounted) {
+            if (mounted &&
+                Provider.of<Auth>(
+                      context,
+                      listen: false,
+                    ).getUser!['user_type'].toString() ==
+                    'owner') {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 "/tabs",
