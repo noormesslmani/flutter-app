@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/screens/home/home.dart';
-import 'package:frontend_mobile/screens/home/profile.dart';
-import 'package:frontend_mobile/screens/home/chats.dart';
-import 'package:frontend_mobile/screens/home/favorites.dart';
-import 'package:frontend_mobile/screens/home/notification.dart';
+import 'package:frontend_mobile/screens/app/home.dart';
+import 'package:frontend_mobile/screens/app/profile.dart';
+import 'package:frontend_mobile/screens/app/chats.dart';
+import 'package:frontend_mobile/screens/app/favorites.dart';
+import 'package:frontend_mobile/screens/app/notification.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 
@@ -74,7 +74,7 @@ class _TabsState extends State<Tabs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: ReusableWidgets.getAppBar(title, false),
+        appBar: ReusableWidgets.getAppBar(title, false, null),
         bottomNavigationBar: ConvexAppBar(
           backgroundColor: Theme.of(context).primaryColor,
           initialActiveIndex: _selectedIndex,

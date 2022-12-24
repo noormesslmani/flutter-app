@@ -97,14 +97,19 @@ class _HomeState extends State<Home> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    "/serviceProvidersList",
+                    arguments: selectedService,
+                  );
+                },
                 child: Text(
                   "View All",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .apply(color: Colors.grey),
+                  style: Theme.of(context).textTheme.bodySmall!.apply(
+                        color: Colors.grey,
+                      ),
                 ),
-              )
+              ),
             ],
           ),
           const SizedBox(
