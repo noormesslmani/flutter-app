@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_mobile/screens/app/service_providers_list.dart';
 import 'package:frontend_mobile/screens/onboarding.dart';
 import 'package:frontend_mobile/tools/themes/light_mode.dart';
 import 'package:frontend_mobile/screens/auth/Sign_in.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up1.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up2.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up3.dart';
-import 'package:frontend_mobile/screens/tabs.dart';
+import 'package:frontend_mobile/screens/app/pet_owner_tabs.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import './providers/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:frontend_mobile/screens/auth/Email_verification.dart';
+import 'package:frontend_mobile/screens/app/pet_owner_tabs.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +48,7 @@ class MyApp extends StatelessWidget {
             "/signup3": (context) => const SignUp3(),
             "/verifyEmail": (context) => const VerifyEmail(),
             "/tabs": (context) => const Tabs(),
+            "/serviceProvidersList": (context) => const ServiceProvidersList(),
           },
         ),
       ),
