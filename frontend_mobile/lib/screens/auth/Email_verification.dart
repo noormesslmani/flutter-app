@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 import 'package:frontend_mobile/services/auth_service.dart';
 import 'package:frontend_mobile/utilities/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:frontend_mobile/providers/auth.dart';
+import 'package:frontend_mobile/widgets/app_bar.dart';
 
 class VerifyEmail extends StatefulWidget {
   const VerifyEmail({super.key});
@@ -74,7 +74,11 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ReusableWidgets.getAppBar('Email Verification', false, null),
+      appBar: CustomAppBar(
+        appBar: AppBar(),
+        title: 'Email Verification',
+        showBack: false,
+      ),
       body: const Center(
         child:
             Text('A Verification email has been sent, please check your inbox'),

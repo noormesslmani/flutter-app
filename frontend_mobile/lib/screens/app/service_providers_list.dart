@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 import 'package:frontend_mobile/widgets/cards/vet_card.dart';
 import 'package:frontend_mobile/widgets/cards/service_provider_card.dart';
 import 'package:frontend_mobile/widgets/input.dart';
+import 'package:frontend_mobile/widgets/app_bar.dart';
 
 class ServiceProvidersList extends StatefulWidget {
   const ServiceProvidersList({super.key});
@@ -12,6 +12,7 @@ class ServiceProvidersList extends StatefulWidget {
 }
 
 class _ServiceProvidersListState extends State<ServiceProvidersList> {
+  void onTap() {}
   @override
   Widget build(BuildContext context) {
     String searchQuery = '';
@@ -19,20 +20,21 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
     final selectedService =
         ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
-      appBar: ReusableWidgets.getAppBar(
-        selectedService,
-        true,
-        [
-          const Icon(
-            Icons.map,
-            size: 35,
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          const Icon(
-            Icons.filter_alt,
-            size: 35,
+      appBar: CustomAppBar(
+        appBar: AppBar(),
+        title: selectedService,
+        showBack: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            child: GestureDetector(
+              child: const Icon(
+                Icons.map,
+                size: 35,
+              ),
+            ),
           ),
         ],
       ),
@@ -68,7 +70,10 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         itemCount: 10,
                         itemBuilder: (BuildContext context, int index) {
-                          return const VetCard();
+                          return const Padding(
+                            padding: EdgeInsets.all(3.0),
+                            child: VetCard(),
+                          );
                         },
                       )
                     : GridView.count(
@@ -77,7 +82,7 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
                           10,
                           (index) {
                             return const Padding(
-                              padding: EdgeInsets.all(3),
+                              padding: EdgeInsets.all(5),
                               child: ServiceProviderCard(),
                             );
                           },

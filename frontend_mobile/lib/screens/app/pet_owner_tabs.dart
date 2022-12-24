@@ -6,7 +6,7 @@ import 'package:frontend_mobile/screens/app/chats.dart';
 import 'package:frontend_mobile/screens/app/favorites.dart';
 import 'package:frontend_mobile/screens/app/notification.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:frontend_mobile/widgets/reusable_widgets.dart';
+import 'package:frontend_mobile/widgets/app_bar.dart';
 
 class Tabs extends StatefulWidget {
   const Tabs({super.key});
@@ -74,7 +74,11 @@ class _TabsState extends State<Tabs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: ReusableWidgets.getAppBar(title, false, null),
+        appBar: CustomAppBar(
+          title: title,
+          appBar: AppBar(),
+          showBack: false,
+        ),
         bottomNavigationBar: ConvexAppBar(
           backgroundColor: Theme.of(context).primaryColor,
           initialActiveIndex: _selectedIndex,

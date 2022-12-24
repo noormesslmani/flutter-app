@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:flutter/gestures.dart';
 import 'package:frontend_mobile/screens/auth/Sign_up1.dart';
-import 'package:frontend_mobile/widgets/reusable_widgets.dart';
 import 'package:frontend_mobile/utilities/validators.dart';
 import 'package:frontend_mobile/services/auth_service.dart';
 import 'package:frontend_mobile/providers/auth.dart';
 import 'package:frontend_mobile/utilities/exceptions.dart';
 import 'package:provider/provider.dart';
-
+import 'package:frontend_mobile/widgets/app_bar.dart';
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
 
@@ -66,7 +64,11 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ReusableWidgets.getAppBar('Log In', false, null),
+      appBar: CustomAppBar(
+        appBar: AppBar(),
+        title: 'LogIn',
+        showBack: false,
+      ),
       backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
