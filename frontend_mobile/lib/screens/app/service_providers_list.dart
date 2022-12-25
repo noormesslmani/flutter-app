@@ -44,105 +44,103 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
         ],
       ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 20,
-            horizontal: 10,
-          ),
-          child: Expanded(
-            child: Column(
+        padding: const EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 10,
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      child: Input(
-                        setData: (text) {
-                          setState(
-                            () {
-                              searchQuery = text;
-                            },
-                          );
-                          debugPrint(searchQuery);
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: Input(
+                    setData: (text) {
+                      setState(
+                        () {
+                          searchQuery = text;
                         },
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          color: Colors.grey,
-                        ),
-                        label: 'Search',
-                        focusNode: searchFocusNode,
-                      ),
+                      );
+                      debugPrint(searchQuery);
+                    },
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: Colors.grey,
                     ),
-                    GestureDetector(
-                      child: Icon(
-                        Icons.filter_list,
-                        size: 35,
-                        color: Theme.of(context).primaryColorDark,
+                    label: 'Search',
+                    focusNode: searchFocusNode,
+                  ),
+                ),
+                GestureDetector(
+                  child: Icon(
+                    Icons.filter_list,
+                    size: 35,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
+                        ),
                       ),
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(20),
-                            ),
-                          ),
-                          builder: (context) {
-                            return StatefulBuilder(
-                              builder: (
-                                BuildContext context,
-                                StateSetter setState,
-                              ) {
-                                return FilterSheet(
-                                  currentSliderValue: currentSliderValue,
-                                  minRating: minRating,
-                                  setMinRating: (val) =>
-                                      setState(() => minRating = val),
-                                  setSliderValue: (val) =>
-                                      setState(() => currentSliderValue = val),
-                                  setSortBy: (val) =>
-                                      setState(() => sortBy = val),
-                                  sortBy: sortBy,
-                                );
-                              },
+                      builder: (context) {
+                        return StatefulBuilder(
+                          builder: (
+                            BuildContext context,
+                            StateSetter setState,
+                          ) {
+                            return FilterSheet(
+                              currentSliderValue: currentSliderValue,
+                              minRating: minRating,
+                              setMinRating: (val) =>
+                                  setState(() => minRating = val),
+                              setSliderValue: (val) =>
+                                  setState(() => currentSliderValue = val),
+                              setSortBy: (val) => setState(() => sortBy = val),
+                              sortBy: sortBy,
                             );
                           },
                         );
                       },
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: selectedService == 'Veterinary'
-                      ? ListView.builder(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          itemCount: 10,
-                          itemBuilder: (BuildContext context, int index) {
-                            return const Padding(
-                              padding: EdgeInsets.all(3.0),
-                              child: VetCard(),
-                            );
-                          },
-                        )
-                      : GridView.count(
-                          crossAxisCount: 2,
-                          children: List.generate(
-                            10,
-                            (index) {
-                              return const Padding(
-                                padding: EdgeInsets.all(5),
-                                child: ServiceProviderCard(),
-                              );
-                            },
-                          ),
-                        ),
+                    );
+                  },
                 ),
               ],
             ),
-          )),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: selectedService == 'Veterinary'
+                  ? ListView.builder(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return const Padding(
+                          padding: EdgeInsets.all(3.0),
+                          child: VetCard(),
+                        );
+                      },
+                    )
+                  : GridView.count(
+                      crossAxisCount: 2,
+                      children: List.generate(
+                        10,
+                        (index) {
+                          return const Padding(
+                            padding: EdgeInsets.all(5),
+                            child: ServiceProviderCard(),
+                          );
+                        },
+                      ),
+                    ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
