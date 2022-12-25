@@ -35,6 +35,11 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
               horizontal: 10,
             ),
             child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  "/maps",
+                );
+              },
               child: const Icon(
                 Icons.map,
                 size: 35,

@@ -14,6 +14,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:frontend_mobile/screens/auth/Email_verification.dart';
 import 'package:frontend_mobile/screens/app/pet_owner_tabs.dart';
+import 'package:frontend_mobile/screens/app/maps.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
             "/verifyEmail": (context) => const VerifyEmail(),
             "/tabs": (context) => const Tabs(),
             "/serviceProvidersList": (context) => const ServiceProvidersList(),
+            "/maps": (context) => const Maps(),
           },
         ),
       ),
