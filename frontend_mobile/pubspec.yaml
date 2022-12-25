@@ -50,6 +50,7 @@ dependencies:
   country_picker: ^2.0.19
   firebase_auth: ^4.2.3
   firebase_core: ^2.4.0
+  google_maps_flutter: ^2.2.2
  
   
 
