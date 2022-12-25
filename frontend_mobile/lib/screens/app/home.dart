@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/cards/service_type_card.dart';
 import 'package:frontend_mobile/utilities/serviceCard.dart';
 import 'package:frontend_mobile/widgets/cards/vet_card.dart';
@@ -13,10 +12,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String searchQuery = '';
   String selectedService = ServiceCardUtilities.titles[0];
   int selectedInd = 0;
-  FocusNode searchFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,22 +22,6 @@ class _HomeState extends State<Home> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Input(
-            setData: (text) {
-              setState(
-                () {
-                  searchQuery = text;
-                },
-              );
-              debugPrint(searchQuery);
-            },
-            prefixIcon: const Icon(
-              Icons.search,
-              color: Colors.grey,
-            ),
-            label: 'Search',
-            focusNode: searchFocusNode,
-          ),
           const SizedBox(
             height: 20,
           ),
@@ -121,7 +103,10 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     itemCount: 4,
                     itemBuilder: (BuildContext context, int index) {
-                      return const VetCard();
+                      return const Padding(
+                        padding: EdgeInsets.all(3),
+                        child: VetCard(),
+                      );
                     },
                   )
                 : GridView.count(
@@ -130,7 +115,7 @@ class _HomeState extends State<Home> {
                       4,
                       (index) {
                         return const Padding(
-                          padding: EdgeInsets.all(3),
+                          padding: EdgeInsets.all(5),
                           child: ServiceProviderCard(),
                         );
                       },
