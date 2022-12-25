@@ -3,6 +3,7 @@ import 'package:frontend_mobile/widgets/cards/vet_card.dart';
 import 'package:frontend_mobile/widgets/cards/service_provider_card.dart';
 import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/app_bar.dart';
+import 'package:frontend_mobile/widgets/filter_sheet.dart';
 
 class ServiceProvidersList extends StatefulWidget {
   const ServiceProvidersList({super.key});
@@ -12,13 +13,17 @@ class ServiceProvidersList extends StatefulWidget {
 }
 
 class _ServiceProvidersListState extends State<ServiceProvidersList> {
-  void onTap() {}
+  String searchQuery = '';
+  FocusNode searchFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
-    String searchQuery = '';
-    FocusNode searchFocusNode = FocusNode();
     final selectedService =
         ModalRoute.of(context)?.settings.arguments as String;
+    double currentSliderValue = 150;
+    String sortBy = 'Popularity';
+    String minRating = '1';
+
     return Scaffold(
       appBar: CustomAppBar(
         appBar: AppBar(),
@@ -74,6 +79,36 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
                         size: 35,
                         color: Theme.of(context).primaryColorDark,
                       ),
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                            ),
+                          ),
+                          builder: (context) {
+                            return StatefulBuilder(
+                              builder: (
+                                BuildContext context,
+                                StateSetter setState,
+                              ) {
+                                return FilterSheet(
+                                  currentSliderValue: currentSliderValue,
+                                  minRating: minRating,
+                                  setMinRating: (val) =>
+                                      setState(() => minRating = val),
+                                  setSliderValue: (val) =>
+                                      setState(() => currentSliderValue = val),
+                                  setSortBy: (val) =>
+                                      setState(() => sortBy = val),
+                                  sortBy: sortBy,
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),
