@@ -20,7 +20,8 @@ class ServiceProviderCard extends StatelessWidget {
               child: Image.asset(
                 "assets/images/pet-owner.jpg",
                 width: double.infinity,
-                fit: BoxFit.fill,
+                height: double.infinity,
+                fit: BoxFit.cover,
               ),
             ),
           ),
