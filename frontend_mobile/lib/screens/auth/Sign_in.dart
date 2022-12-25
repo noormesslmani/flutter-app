@@ -10,6 +10,7 @@ import 'package:frontend_mobile/providers/auth.dart';
 import 'package:frontend_mobile/utilities/exceptions.dart';
 import 'package:provider/provider.dart';
 import 'package:frontend_mobile/widgets/app_bar.dart';
+
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
 
@@ -42,7 +43,7 @@ class _SignInState extends State<SignIn> {
           Provider.of<Auth>(
                 context,
                 listen: false,
-              ).getUser!['user_type'].toString() ==
+              ).getUser!.userType ==
               'owner') {
         Navigator.pushNamedAndRemoveUntil(
           context,

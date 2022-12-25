@@ -39,7 +39,7 @@ class _VerifyEmailState extends State<VerifyEmail> with WidgetsBindingObserver {
                 Provider.of<Auth>(
                       context,
                       listen: false,
-                    ).getUser!['user_type'].toString() ==
+                    ).getUser!.userType ==
                     'owner') {
               Navigator.pushNamedAndRemoveUntil(
                 context,
