@@ -8,30 +8,45 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:frontend_mobile/providers/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:frontend_mobile/models/user.dart';
 
 class AuthService with ChangeNotifier {
   bool isEmailVerified = false;
   Timer? timer;
+
   Future<void> login(String email, String password, context) async {
     try {
       final url = Uri.http(Requests.url, '/auth/login');
+
       final response = await http.post(url,
           body: json.encode({'email': email, 'password': password}),
           headers: Requests().getHeaders(context));
       final data = json.decode(response.body);
 
       if (response.statusCode != 200) {
+        debugPrint(data['message']);
         throw HttpException(data["message"]);
       }
 
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("token", data["token"]);
 
-      Provider.of<Auth>(context, listen: false).setUser(data['user']);
-      Provider.of<Auth>(context, listen: false).setToken(data["token"]);
+      Provider.of<Auth>(
+        context,
+        listen: false,
+      ).setUser(
+        CurrentUser.fromJson(data),
+      );
+      Provider.of<Auth>(
+        context,
+        listen: false,
+      ).setToken(
+        data["token"],
+      );
       notifyListeners();
-      debugPrint(data["user"]["email"]);
     } catch (error) {
+      debugPrint(error.toString());
+
       rethrow;
     }
   }
@@ -59,10 +74,19 @@ class AuthService with ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("token", data["token"]);
 
-      Provider.of<Auth>(context, listen: false).setUser(data['user']);
-      Provider.of<Auth>(context, listen: false).setToken(data["token"]);
+      Provider.of<Auth>(
+        context,
+        listen: false,
+      ).setUser(
+        CurrentUser.fromJson(data),
+      );
+      Provider.of<Auth>(
+        context,
+        listen: false,
+      ).setToken(
+        data["token"],
+      );
       notifyListeners();
-      debugPrint(data["user"]["email"]);
     } catch (error) {
       rethrow;
     }
