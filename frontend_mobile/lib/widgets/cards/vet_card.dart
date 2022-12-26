@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class VetCard extends StatelessWidget {
-  const VetCard({super.key});
+  final BuildContext context;
+  const VetCard({required this.context, super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120,
+      height: 140,
       child: Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(
@@ -38,12 +39,29 @@ class VetCard extends StatelessWidget {
                     width: 10,
                   ),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Dr. Amy Fox',
-                        style: Theme.of(context).textTheme.titleSmall,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Dr. Amy Fox',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.work,
+                                size: 20,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              const Text(
+                                ': 4 years',
+                              ),
+                            ],
+                          )
+                        ],
                       ),
                       Row(
                         children: [
@@ -67,7 +85,9 @@ class VetCard extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.location_pin,
-                                color: Theme.of(context).colorScheme.secondary,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 size: 20,
                               ),
                               Text(
@@ -82,21 +102,18 @@ class VetCard extends StatelessWidget {
                   )
                 ],
               ),
-              GestureDetector(
-                child: Container(
-                  alignment: Alignment.center,
-                  width: 50,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColorLight,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Icon(
-                    Icons.arrow_right,
-                    size: 40,
-                    color: Colors.white,
-                  ),
+              IconButton(
+                onPressed: () {},
+                padding: const EdgeInsets.all(0),
+                iconSize: 60,
+                splashRadius: 40,
+                splashColor: Theme.of(context).colorScheme.secondary,
+                icon: Icon(
+                  Icons.arrow_right,
+                  color: Theme.of(context).primaryColorLight,
                 ),
+                color: Theme.of(context).primaryColorLight,
+                alignment: Alignment.center,
               ),
             ],
           ),
