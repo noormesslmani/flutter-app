@@ -56,8 +56,9 @@ class VetCard extends StatelessWidget {
                                 size: 20,
                                 color: Theme.of(context).colorScheme.secondary,
                               ),
-                              const Text(
-                                ': 4 years',
+                              Text(
+                                ' 4 years',
+                                style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ],
                           )
@@ -103,7 +104,11 @@ class VetCard extends StatelessWidget {
                 ],
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    "/vetDetails",
+                  );
+                },
                 padding: const EdgeInsets.all(0),
                 iconSize: 60,
                 splashRadius: 40,

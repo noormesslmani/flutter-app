@@ -103,9 +103,11 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     itemCount: 4,
                     itemBuilder: (BuildContext context, int index) {
-                      return const Padding(
-                        padding: EdgeInsets.all(3),
-                        child: VetCard(),
+                      return Padding(
+                        padding: const EdgeInsets.all(3),
+                        child: VetCard(
+                          context: context,
+                        ),
                       );
                     },
                   )

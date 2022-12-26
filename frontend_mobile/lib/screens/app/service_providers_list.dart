@@ -138,9 +138,9 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
-                        return const Padding(
-                          padding: EdgeInsets.all(3.0),
-                          child: VetCard(),
+                        return Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: VetCard(context: context,),
                         );
                       },
                     )
