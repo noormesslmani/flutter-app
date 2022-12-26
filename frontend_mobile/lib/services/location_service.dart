@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 
-class LocationService with ChangeNotifier {
+class LocationService {
   static Future<Position> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
