@@ -4,6 +4,7 @@ import 'package:frontend_mobile/widgets/cards/service_provider_card.dart';
 import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/app_bar.dart';
 import 'package:frontend_mobile/widgets/filter_sheet.dart';
+import 'package:frontend_mobile/models/filters.dart';
 
 class ServiceProvidersList extends StatefulWidget {
   const ServiceProvidersList({super.key});
@@ -23,6 +24,8 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
     double currentSliderValue = 150;
     String sortBy = 'Popularity';
     String minRating = '1';
+    Filters filters =
+        Filters(distance: 150, sortBy: 'Popularity', minRating: 1);
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -105,6 +108,17 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
                               setSliderValue: (val) =>
                                   setState(() => currentSliderValue = val),
                               setSortBy: (val) => setState(() => sortBy = val),
+                              setFilters: () {
+                                setState(
+                                  () {
+                                    filters.distance = currentSliderValue;
+                                    filters.minRating = int.parse(minRating);
+                                    filters.sortBy = sortBy;
+                                  },
+                                );
+
+                                Navigator.pop(context);
+                              },
                               sortBy: sortBy,
                             );
                           },

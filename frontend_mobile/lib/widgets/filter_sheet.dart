@@ -10,7 +10,7 @@ class FilterSheet extends StatelessWidget {
   final Function setSliderValue;
   final String minRating;
   final Function setMinRating;
-
+  final void Function()? setFilters;
   const FilterSheet(
       {required this.currentSliderValue,
       required this.minRating,
@@ -18,6 +18,7 @@ class FilterSheet extends StatelessWidget {
       required this.setSliderValue,
       required this.setSortBy,
       required this.sortBy,
+      required this.setFilters,
       super.key});
 
   @override
@@ -156,6 +157,7 @@ class FilterSheet extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColorLight,
                   ),
+                  onPressed: setFilters,
                   child: const Padding(
                     padding: EdgeInsets.all(10),
                     child: Text(
@@ -164,8 +166,7 @@ class FilterSheet extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                  ),
-                  onPressed: () => Navigator.pop(context),
+                  )
                 ),
               ],
             ),
