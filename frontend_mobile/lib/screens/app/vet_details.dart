@@ -4,6 +4,7 @@ import 'package:frontend_mobile/widgets/text_expand.dart';
 import 'package:horizontal_calendar/horizontal_calendar.dart';
 import 'package:frontend_mobile/widgets/cards/appointment_slot.dart';
 import 'package:frontend_mobile/widgets/dialogs/confirm_dialog.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class VetDetails extends StatefulWidget {
   const VetDetails({super.key});
@@ -22,6 +23,9 @@ class _VetDetailsState extends State<VetDetails> {
     '10:00-11:00',
     '11:00-12:00',
     '12:00-13:00'
+  ];
+  final List<LatLng> locations = <LatLng>[
+    const LatLng(33.557069, 35.372948),
   ];
   @override
   Widget build(BuildContext context) {
@@ -149,23 +153,31 @@ class _VetDetailsState extends State<VetDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        VetDetailCard(
-                          icon: Icon(
-                            Icons.star,
-                            color: Colors.yellow[700],
-                            size: 30,
+                        GestureDetector(
+                          child: VetDetailCard(
+                            icon: Icon(
+                              Icons.star,
+                              color: Colors.yellow[700],
+                              size: 30,
+                            ),
+                            text: '4.5/5',
+                            title: 'Rating',
                           ),
-                          text: '4.5/5',
-                          title: 'Rating',
                         ),
-                        VetDetailCard(
-                          icon: Icon(
-                            Icons.location_pin,
-                            color: Theme.of(context).colorScheme.secondary,
-                            size: 30,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed("/maps", arguments: locations);
+                          },
+                          child: VetDetailCard(
+                            icon: Icon(
+                              Icons.location_pin,
+                              color: Theme.of(context).colorScheme.secondary,
+                              size: 30,
+                            ),
+                            text: '3 Km',
+                            title: 'Location',
                           ),
-                          text: '3 Km',
-                          title: 'Location',
                         ),
                       ],
                     ),
