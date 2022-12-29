@@ -9,42 +9,40 @@ class VetDetailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.45,
-        height: 80,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey,
-          ),
-          borderRadius: BorderRadius.circular(10),
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.45,
+      height: 80,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey,
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .apply(color: Colors.grey),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  icon,
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(text, style: Theme.of(context).textTheme.titleMedium!),
-                ],
-              ),
-            ],
-          ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .apply(color: Colors.grey),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                icon,
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(text, style: Theme.of(context).textTheme.titleMedium!),
+              ],
+            ),
+          ],
         ),
       ),
     );
