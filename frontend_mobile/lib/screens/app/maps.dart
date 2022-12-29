@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:frontend_mobile/widgets/app_bar.dart';
-import 'dart:ui' as ui;
 import 'package:flutter/services.dart';
 import 'package:frontend_mobile/services/location_service.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:frontend_mobile/utilities/maps.dart';
 
 class Maps extends StatefulWidget {
   const Maps({Key? key}) : super(key: key);
@@ -28,14 +27,8 @@ class MapsState extends State<Maps> {
   }
 
   void getBytesFromAsset(String path, int width) async {
-    ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
     setState(() async {
-      byteData = (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
-          .buffer
-          .asUint8List();
+      byteData = await MapUtilities().getBytesFromAsset(path, width);
     });
   }
 
@@ -81,7 +74,7 @@ class MapsState extends State<Maps> {
       polylineId: id,
       color: Colors.blue,
       points: polylineCoordinates,
-      width: 2,
+      width: 3,
     );
     polylines[id] = polyline;
     setState(() {});
@@ -120,25 +113,12 @@ class MapsState extends State<Maps> {
                         child: FloatingActionButton(
                           child: const Icon(Icons.route),
                           onPressed: () async {
-                            PolylineResult result =
-                                await polylinePoints.getRouteBetweenCoordinates(
-                              dotenv.env['GOOGLE_MAPS_API_KEY'].toString(),
-                              PointLatLng(_initialLocation!.latitude,
-                                  _initialLocation!.longitude),
-                              PointLatLng(locations[0].latitude,
-                                  locations[0].longitude),
-                              travelMode: TravelMode.driving,
+                            await MapUtilities().getRoute(
+                              polylinePoints,
+                              _initialLocation,
+                              polylineCoordinates,
+                              locations,
                             );
-
-                            if (result.points.isNotEmpty) {
-                              for (var point in result.points) {
-                                polylineCoordinates.add(
-                                    LatLng(point.latitude, point.longitude));
-                              }
-                            } else {
-                              print(result.errorMessage);
-                            }
-
                             addPolyLine(polylineCoordinates);
                           },
                         ),
