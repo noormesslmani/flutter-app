@@ -53,6 +53,7 @@ dependencies:
   google_maps_flutter: ^2.2.2
   geolocator: ^9.0.2
   flutter_config: ^2.0.0
+  horizontal_calendar: ^1.0.1
  
   
 
