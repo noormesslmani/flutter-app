@@ -9,6 +9,11 @@ class LightTheme {
     focusColor: const Color.fromRGBO(122, 188, 178, 1),
     errorColor: const Color.fromARGB(255, 195, 29, 26),
     indicatorColor: const Color.fromRGBO(242, 158, 146, 1),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Color.fromRGBO(240, 199, 200, 1),
+      elevation: 2,
+      iconSize: 22,
+    ),
     colorScheme: ColorScheme.fromSwatch().copyWith(
       secondaryContainer: const Color.fromRGBO(242, 158, 146, 1),
       secondary: const Color.fromRGBO(240, 199, 200, 1),
