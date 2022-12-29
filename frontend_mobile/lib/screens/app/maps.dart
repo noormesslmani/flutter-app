@@ -5,6 +5,7 @@ import 'package:frontend_mobile/widgets/app_bar.dart';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
+import 'package:frontend_mobile/services/location_service.dart';
 
 class Maps extends StatefulWidget {
   const Maps({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class Maps extends StatefulWidget {
 class MapsState extends State<Maps> {
   Set<Marker> markers = {};
   Uint8List? byteData;
+  LatLng? _initialLocation;
   final List<LatLng> locations = <LatLng>[
     const LatLng(-9.81967, -67.50781),
     const LatLng(25.84769, 38.57712),
@@ -30,6 +32,7 @@ class MapsState extends State<Maps> {
   @override
   void initState() {
     getBytesFromAsset("assets/images/pin3.png", 100);
+    setInitialLocation();
     super.initState();
   }
 
@@ -43,6 +46,21 @@ class MapsState extends State<Maps> {
           .buffer
           .asUint8List();
     });
+  }
+
+  void setInitialLocation() async {
+    debugPrint('loading');
+    try {
+      await LocationService.determinePosition().then(((value) {
+        setState(() {
+          _initialLocation = LatLng(value.latitude, value.longitude);
+        });
+      }));
+    } catch (error) {
+      setState(() {
+        _initialLocation = const LatLng(33.888630, 35.495480);
+      });
+    }
   }
 
   void onMapcreated(GoogleMapController controller) {
@@ -72,18 +90,22 @@ class MapsState extends State<Maps> {
         title: 'Maps',
         showBack: true,
       ),
-      body: GoogleMap(
-        mapType: MapType.normal,
-        markers: markers,
-        myLocationEnabled: true,
-        myLocationButtonEnabled: true,
-        compassEnabled: true,
-        initialCameraPosition: const CameraPosition(
-          target: LatLng(33.888630, 35.495480),
-          zoom: 12,
-        ),
-        onMapCreated: onMapcreated,
-      ),
+      body: _initialLocation != null
+          ? GoogleMap(
+              mapType: MapType.normal,
+              markers: markers,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true,
+              compassEnabled: true,
+              initialCameraPosition: CameraPosition(
+                target: _initialLocation!,
+                zoom: 12,
+              ),
+              onMapCreated: onMapcreated,
+            )
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 }
