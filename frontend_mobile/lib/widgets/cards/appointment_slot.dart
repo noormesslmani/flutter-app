@@ -27,7 +27,7 @@ class AppointmentSlot extends StatelessWidget {
         time,
         style: Theme.of(context)
             .textTheme
-            .labelSmall!
+            .labelMedium!
             .apply(color: selectedIndex == index ? Colors.white : null),
       ),
     );
