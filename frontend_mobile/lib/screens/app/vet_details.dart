@@ -9,6 +9,7 @@ class VetDetails extends StatefulWidget {
 }
 
 class _VetDetailsState extends State<VetDetails> {
+  bool _isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,10 +44,14 @@ class _VetDetailsState extends State<VetDetails> {
                         shape: BoxShape.circle,
                       ),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            _isFavorite = !_isFavorite;
+                          });
+                        },
                         splashColor: Theme.of(context).colorScheme.secondary,
                         icon: Icon(
-                          Icons.favorite_border,
+                          _isFavorite ? Icons.favorite : Icons.favorite_border,
                           size: 30,
                           color:
                               Theme.of(context).colorScheme.secondaryContainer,
