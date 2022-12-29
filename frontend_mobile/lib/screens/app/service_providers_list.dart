@@ -5,7 +5,7 @@ import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/app_bar.dart';
 import 'package:frontend_mobile/widgets/filter_sheet.dart';
 import 'package:frontend_mobile/models/filters.dart';
-
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 class ServiceProvidersList extends StatefulWidget {
   const ServiceProvidersList({super.key});
 
@@ -16,7 +16,17 @@ class ServiceProvidersList extends StatefulWidget {
 class _ServiceProvidersListState extends State<ServiceProvidersList> {
   String searchQuery = '';
   FocusNode searchFocusNode = FocusNode();
-
+  final List<LatLng> locations = <LatLng>[
+    const LatLng(-9.81967, -67.50781),
+    const LatLng(25.84769, 38.57712),
+    const LatLng(21.24830, 81.56812),
+    const LatLng(-5.14471, 30.96037),
+    const LatLng(58.95652, 46.02342),
+    const LatLng(52.29517, -76.58306),
+    const LatLng(6.74938, 14.55162),
+    const LatLng(0.97975, -60.86465),
+    const LatLng(34.92413, 43.16627),
+  ];
   @override
   Widget build(BuildContext context) {
     final selectedService =
@@ -41,6 +51,7 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
               onTap: () {
                 Navigator.of(context).pushNamed(
                   "/maps",
+                  arguments: locations
                 );
               },
               child: const Icon(

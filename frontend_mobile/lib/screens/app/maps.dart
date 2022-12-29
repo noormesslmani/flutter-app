@@ -6,6 +6,7 @@ import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:frontend_mobile/services/location_service.dart';
+import 'package:geolocator/geolocator.dart';
 
 class Maps extends StatefulWidget {
   const Maps({Key? key}) : super(key: key);
@@ -17,17 +18,6 @@ class MapsState extends State<Maps> {
   Set<Marker> markers = {};
   Uint8List? byteData;
   LatLng? _initialLocation;
-  final List<LatLng> locations = <LatLng>[
-    const LatLng(-9.81967, -67.50781),
-    const LatLng(25.84769, 38.57712),
-    const LatLng(21.24830, 81.56812),
-    const LatLng(-5.14471, 30.96037),
-    const LatLng(58.95652, 46.02342),
-    const LatLng(52.29517, -76.58306),
-    const LatLng(6.74938, 14.55162),
-    const LatLng(0.97975, -60.86465),
-    const LatLng(34.92413, 43.16627),
-  ];
 
   @override
   void initState() {
@@ -64,6 +54,8 @@ class MapsState extends State<Maps> {
   }
 
   void onMapcreated(GoogleMapController controller) {
+    final locations =
+        ModalRoute.of(context)?.settings.arguments as List<LatLng>;
     setState(
       () {
         for (int i = 0; i < locations.length; i++) {
