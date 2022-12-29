@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:ui' as ui;
+import 'package:flutter/material.dart';
 
 class MapUtilities {
   Uint8List? byteData;
@@ -18,7 +19,7 @@ class MapUtilities {
     return byteData;
   }
 
-  Future<void> getRoute(PolylinePoints polylinePoints, LatLng? initialLocation,
+  static Future<void> getRoute(PolylinePoints polylinePoints, LatLng? initialLocation,
       List<LatLng> polylineCoordinates, List<LatLng> locations) async {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       dotenv.env['GOOGLE_MAPS_API_KEY'].toString(),
@@ -34,5 +35,17 @@ class MapUtilities {
     } else {
       print(result.errorMessage);
     }
+  }
+
+  static void addPolyLine(
+      List<LatLng> polylineCoordinates, Map<PolylineId, Polyline> polylines) {
+    PolylineId id = const PolylineId("poly");
+    Polyline polyline = Polyline(
+      polylineId: id,
+      color: Colors.blue,
+      points: polylineCoordinates,
+      width: 3,
+    );
+    polylines[id] = polyline;
   }
 }

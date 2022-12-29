@@ -68,18 +68,6 @@ class MapsState extends State<Maps> {
     );
   }
 
-  addPolyLine(List<LatLng> polylineCoordinates) {
-    PolylineId id = const PolylineId("poly");
-    Polyline polyline = Polyline(
-      polylineId: id,
-      color: Colors.blue,
-      points: polylineCoordinates,
-      width: 3,
-    );
-    polylines[id] = polyline;
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     final locations =
@@ -113,13 +101,15 @@ class MapsState extends State<Maps> {
                         child: FloatingActionButton(
                           child: const Icon(Icons.route),
                           onPressed: () async {
-                            await MapUtilities().getRoute(
+                            await MapUtilities.getRoute(
                               polylinePoints,
                               _initialLocation,
                               polylineCoordinates,
                               locations,
                             );
-                            addPolyLine(polylineCoordinates);
+                            MapUtilities.addPolyLine(
+                                polylineCoordinates, polylines);
+                            setState(() {});
                           },
                         ),
                       )
