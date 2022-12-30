@@ -6,11 +6,15 @@ class MapModal extends StatelessWidget {
   final double rating;
   final void Function()? onButtonPress;
   final void Function()? onArrowPress;
+  final String distance;
+  final String duration;
   const MapModal(
       {required this.name,
       required this.onArrowPress,
       required this.onButtonPress,
       required this.rating,
+      required this.distance,
+      required this.duration,
       super.key});
 
   @override
@@ -83,7 +87,7 @@ class MapModal extends StatelessWidget {
                                   .secondaryContainer,
                             ),
                             Text(
-                              '5Km',
+                              distance,
                               style: Theme.of(context).textTheme.labelMedium,
                             ),
                           ],
@@ -98,7 +102,7 @@ class MapModal extends StatelessWidget {
                               color: Colors.grey,
                             ),
                             Text(
-                              '30 min',
+                              duration,
                               style: Theme.of(context).textTheme.labelMedium,
                             ),
                           ],
