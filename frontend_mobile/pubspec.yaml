@@ -55,6 +55,7 @@ dependencies:
   flutter_config: ^2.0.0
   horizontal_calendar: ^1.0.1
   flutter_polyline_points: ^1.0.0
+  flutter_rating_bar: ^4.0.1
  
   
 
