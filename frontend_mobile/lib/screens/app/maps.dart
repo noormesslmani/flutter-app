@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:frontend_mobile/services/location_service.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:frontend_mobile/utilities/maps.dart';
+import 'package:frontend_mobile/widgets/modals/map_modal.dart';
 
 class Maps extends StatefulWidget {
   const Maps({Key? key}) : super(key: key);
@@ -19,9 +20,11 @@ class MapsState extends State<Maps> {
   PolylinePoints polylinePoints = PolylinePoints();
   List<LatLng> polylineCoordinates = [];
   Map<PolylineId, Polyline> polylines = {};
+  double distance = 0;
+
   @override
   void initState() {
-    getBytesFromAsset("assets/images/pin3.png", 100);
+    getBytesFromAsset("assets/images/pin4.png", 100);
     setInitialLocation();
     super.initState();
   }
@@ -47,29 +50,57 @@ class MapsState extends State<Maps> {
     }
   }
 
-  void onMapcreated(GoogleMapController controller) async {
-    final locations =
-        ModalRoute.of(context)?.settings.arguments as List<LatLng>;
-    setState(
-      () {
-        for (int i = 0; i < locations.length; i++) {
-          markers.add(
-            Marker(
-              markerId: MarkerId(i.toString()),
-              icon: BitmapDescriptor.fromBytes(byteData!),
-              position: locations[i],
-              infoWindow: InfoWindow(
-                title: 'Location: $i',
-              ),
-            ),
-          );
-        }
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    void onMapcreated(GoogleMapController controller) async {
+      final locations =
+          ModalRoute.of(context)?.settings.arguments as List<LatLng>;
+      setState(
+        () {
+          for (int i = 0; i < locations.length; i++) {
+            markers.add(
+              Marker(
+                onTap: () {
+                  showModalBottomSheet<void>(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      ),
+                    ),
+                    builder: (BuildContext context) {
+                      return MapModal(
+                        name: 'Dr Nour Messlmani',
+                        onArrowPress: () {},
+                        onButtonPress: () async {
+                          await MapUtilities.getRoute(
+                            polylinePoints,
+                            _initialLocation,
+                            polylineCoordinates,
+                            locations[i],
+                          );
+                          MapUtilities.addPolyLine(
+                              polylineCoordinates, polylines);
+                          setState(() {});
+                        },
+                        rating: 4,
+                      );
+                    },
+                  );
+                },
+                markerId: MarkerId(i.toString()),
+                icon: BitmapDescriptor.fromBytes(byteData!),
+                position: locations[i],
+                infoWindow: InfoWindow(
+                  title: 'Location: $i',
+                ),
+              ),
+            );
+          }
+        },
+      );
+    }
+
     final locations =
         ModalRoute.of(context)?.settings.arguments as List<LatLng>;
     return Scaffold(
@@ -79,42 +110,18 @@ class MapsState extends State<Maps> {
         showBack: true,
       ),
       body: _initialLocation != null
-          ? Stack(
-              alignment: AlignmentDirectional.bottomCenter,
-              children: [
-                GoogleMap(
-                  polylines: Set<Polyline>.of(polylines.values),
-                  mapType: MapType.normal,
-                  markers: markers,
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
-                  compassEnabled: true,
-                  initialCameraPosition: CameraPosition(
-                    target: _initialLocation!,
-                    zoom: 12,
-                  ),
-                  onMapCreated: onMapcreated,
-                ),
-                locations.length == 1
-                    ? Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: FloatingActionButton(
-                          child: const Icon(Icons.route),
-                          onPressed: () async {
-                            await MapUtilities.getRoute(
-                              polylinePoints,
-                              _initialLocation,
-                              polylineCoordinates,
-                              locations,
-                            );
-                            MapUtilities.addPolyLine(
-                                polylineCoordinates, polylines);
-                            setState(() {});
-                          },
-                        ),
-                      )
-                    : const SizedBox.shrink()
-              ],
+          ? GoogleMap(
+              polylines: Set<Polyline>.of(polylines.values),
+              mapType: MapType.normal,
+              markers: markers,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true,
+              compassEnabled: true,
+              initialCameraPosition: CameraPosition(
+                target: _initialLocation!,
+                zoom: 12,
+              ),
+              onMapCreated: onMapcreated,
             )
           : const Center(
               child: CircularProgressIndicator(),
