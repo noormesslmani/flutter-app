@@ -4,7 +4,7 @@ import 'package:frontend_mobile/widgets/app_bar.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend_mobile/services/location_service.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:frontend_mobile/utilities/maps.dart';
+import 'package:frontend_mobile/utilities/maps_utilities.dart';
 import 'package:frontend_mobile/widgets/modals/map_modal.dart';
 
 class Maps extends StatefulWidget {
