@@ -38,7 +38,7 @@ class MapsState extends State<Maps> {
   void setInitialLocation() async {
     debugPrint('loading');
     try {
-      await LocationService.determinePosition().then(((value) {
+      await MapUtilities.determinePosition().then(((value) {
         setState(() {
           _initialLocation = LatLng(value.latitude, value.longitude);
         });
