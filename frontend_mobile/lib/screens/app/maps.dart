@@ -20,8 +20,8 @@ class MapsState extends State<Maps> {
   PolylinePoints polylinePoints = PolylinePoints();
   List<LatLng> polylineCoordinates = [];
   Map<PolylineId, Polyline> polylines = {};
-  double distance = 0;
-
+  String _distance = '';
+  String _duration = '';
   @override
   void initState() {
     getBytesFromAsset("assets/images/pin4.png", 100);
@@ -52,15 +52,32 @@ class MapsState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
+    final locations =
+        ModalRoute.of(context)?.settings.arguments as List<LatLng>;
     void onMapcreated(GoogleMapController controller) async {
-      final locations =
-          ModalRoute.of(context)?.settings.arguments as List<LatLng>;
       setState(
         () {
           for (int i = 0; i < locations.length; i++) {
             markers.add(
               Marker(
-                onTap: () {
+                onTap: () async {
+                  try {
+                    await LocationService.getDistanceMatrix(
+                            locations[i], _initialLocation!)
+                        .then(
+                      (value) {
+                        setState(() {
+                          _distance =
+                              value!.rows![0].elements![0].distance!.text!;
+                          _duration =
+                              value.rows![0].elements![0].duration!.text!;
+                        });
+                      },
+                    );
+                  } catch (e) {
+                    debugPrint(e.toString());
+                  }
+
                   showModalBottomSheet<void>(
                     context: context,
                     shape: const RoundedRectangleBorder(
@@ -70,6 +87,8 @@ class MapsState extends State<Maps> {
                     ),
                     builder: (BuildContext context) {
                       return MapModal(
+                        distance: _distance,
+                        duration: _duration,
                         name: 'Dr Nour Messlmani',
                         onArrowPress: () {},
                         onButtonPress: () async {
@@ -101,8 +120,6 @@ class MapsState extends State<Maps> {
       );
     }
 
-    final locations =
-        ModalRoute.of(context)?.settings.arguments as List<LatLng>;
     return Scaffold(
       appBar: CustomAppBar(
         appBar: AppBar(),
