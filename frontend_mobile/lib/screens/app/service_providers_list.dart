@@ -3,7 +3,7 @@ import 'package:frontend_mobile/widgets/cards/vet_card.dart';
 import 'package:frontend_mobile/widgets/cards/service_provider_card.dart';
 import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/app_bar.dart';
-import 'package:frontend_mobile/widgets/filter_sheet.dart';
+import 'package:frontend_mobile/widgets/modals/filter_sheet.dart';
 import 'package:frontend_mobile/models/filters.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 class ServiceProvidersList extends StatefulWidget {

@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String selectedService = ServiceCardUtilities.titles[0];
   int selectedInd = 0;
-
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
