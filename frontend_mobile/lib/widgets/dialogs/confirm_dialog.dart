@@ -9,7 +9,7 @@ class ConfirmDialig extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Please Confirm'),
-      content: const Text('Are you sure to remove the box?'),
+      content: Text(text),
       actions: [
         TextButton(
           onPressed: () {
