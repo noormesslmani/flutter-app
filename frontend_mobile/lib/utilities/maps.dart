@@ -5,6 +5,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class MapUtilities {
   Uint8List? byteData;
@@ -19,12 +20,15 @@ class MapUtilities {
     return byteData;
   }
 
-  static Future<void> getRoute(PolylinePoints polylinePoints, LatLng? initialLocation,
-      List<LatLng> polylineCoordinates, List<LatLng> locations) async {
+  static Future<void> getRoute(
+      PolylinePoints polylinePoints,
+      LatLng? initialLocation,
+      List<LatLng> polylineCoordinates,
+      LatLng locations) async {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       dotenv.env['GOOGLE_MAPS_API_KEY'].toString(),
       PointLatLng(initialLocation!.latitude, initialLocation!.longitude),
-      PointLatLng(locations[0].latitude, locations[0].longitude),
+      PointLatLng(locations.latitude, locations.longitude),
       travelMode: TravelMode.driving,
     );
 
@@ -45,7 +49,19 @@ class MapUtilities {
       color: Colors.blue,
       points: polylineCoordinates,
       width: 3,
+      geodesic: true,
     );
     polylines[id] = polyline;
+  }
+
+  static double calculateDistance(LatLng location1, LatLng location2) {
+    var p = 0.017453292519943295;
+    var a = 0.5 -
+        cos((location2.latitude - location1.latitude) * p) / 2 +
+        cos(location1.latitude * p) *
+            cos(location2.latitude * p) *
+            (1 - cos((location2.longitude - location1.longitude) * p)) /
+            2;
+    return 12742 * asin(sqrt(a));
   }
 }
