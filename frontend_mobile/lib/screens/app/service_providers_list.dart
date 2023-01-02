@@ -6,6 +6,7 @@ import 'package:frontend_mobile/widgets/app_bar.dart';
 import 'package:frontend_mobile/widgets/modals/filter_sheet.dart';
 import 'package:frontend_mobile/models/filters.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class ServiceProvidersList extends StatefulWidget {
   const ServiceProvidersList({super.key});
 
@@ -49,10 +50,7 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
             ),
             child: GestureDetector(
               onTap: () {
-                Navigator.of(context).pushNamed(
-                  "/maps",
-                  arguments: locations
-                );
+                Navigator.of(context).pushNamed("/maps", arguments: locations);
               },
               child: const Icon(
                 Icons.map,
@@ -151,7 +149,9 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.all(3.0),
-                          child: VetCard(context: context,),
+                          child: VetCard(
+                            context: context,
+                          ),
                         );
                       },
                     )
@@ -160,9 +160,15 @@ class _ServiceProvidersListState extends State<ServiceProvidersList> {
                       children: List.generate(
                         10,
                         (index) {
-                          return const Padding(
-                            padding: EdgeInsets.all(5),
-                            child: ServiceProviderCard(),
+                          return Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: ServiceProviderCard(
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                  "/serviceProviderDetails",
+                                );
+                              },
+                            ),
                           );
                         },
                       ),

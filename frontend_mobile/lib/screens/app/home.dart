@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String selectedService = ServiceCardUtilities.titles[0];
   int selectedInd = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -116,9 +116,15 @@ class _HomeState extends State<Home> {
                     children: List.generate(
                       4,
                       (index) {
-                        return const Padding(
-                          padding: EdgeInsets.all(5),
-                          child: ServiceProviderCard(),
+                        return Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: ServiceProviderCard(
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(
+                                "/serviceProviderDetails",
+                              );
+                            },
+                          ),
                         );
                       },
                     ),

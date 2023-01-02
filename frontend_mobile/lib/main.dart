@@ -16,6 +16,7 @@ import 'package:frontend_mobile/screens/auth/Email_verification.dart';
 import 'package:frontend_mobile/screens/app/pet_owner_tabs.dart';
 import 'package:frontend_mobile/screens/app/maps.dart';
 import 'package:frontend_mobile/screens/app/vet_details.dart';
+import 'package:frontend_mobile/screens/app/service_provider_details.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
             "/serviceProvidersList": (context) => const ServiceProvidersList(),
             "/maps": (context) => const Maps(),
             "/vetDetails": ((context) => const VetDetails()),
+            "/serviceProviderDetails":(context) => const ServiceProviderDetails(),
           },
         ),
       ),

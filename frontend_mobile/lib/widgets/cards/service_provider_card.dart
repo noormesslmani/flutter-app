@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ServiceProviderCard extends StatelessWidget {
-  const ServiceProviderCard({super.key});
+  final void Function()? onPressed;
+  const ServiceProviderCard({
+    required this.onPressed,
+    super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +97,7 @@ class ServiceProviderCard extends StatelessWidget {
                           ],
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: onPressed,
                           icon: Icon(
                             Icons.arrow_forward_ios,
                             color: Theme.of(context).primaryColorDark,
