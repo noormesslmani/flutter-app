@@ -5,6 +5,8 @@ import 'package:horizontal_calendar/horizontal_calendar.dart';
 import 'package:frontend_mobile/widgets/cards/appointment_slot.dart';
 import 'package:frontend_mobile/widgets/dialogs/confirm_dialog.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:frontend_mobile/widgets/buttons/chat_button.dart';
+import 'package:frontend_mobile/widgets/buttons/favorite_button.dart';
 
 class VetDetails extends StatefulWidget {
   const VetDetails({super.key});
@@ -60,19 +62,15 @@ class _VetDetailsState extends State<VetDetails> {
                         color: Colors.white,
                         shape: BoxShape.circle,
                       ),
-                      child: IconButton(
+                      child: FavoriteButton(
+                        isFavorite: _isFavorite,
                         onPressed: () {
-                          setState(() {
-                            _isFavorite = !_isFavorite;
-                          });
+                          setState(
+                            () {
+                              _isFavorite = !_isFavorite;
+                            },
+                          );
                         },
-                        splashColor: Theme.of(context).colorScheme.secondary,
-                        icon: Icon(
-                          _isFavorite ? Icons.favorite : Icons.favorite_border,
-                          size: 30,
-                          color:
-                              Theme.of(context).colorScheme.secondaryContainer,
-                        ),
                       ),
                     ),
                   ],
@@ -115,13 +113,10 @@ class _VetDetailsState extends State<VetDetails> {
                           Positioned(
                             right: 5,
                             child: SizedBox(
-                              width: 40,
-                              height: 40,
-                              child: FloatingActionButton(
+                              width: 50,
+                              height: 50,
+                              child: ChatButton(
                                 onPressed: () {},
-                                child: const Icon(
-                                  Icons.chat_bubble,
-                                ),
                               ),
                             ),
                           ),
@@ -151,7 +146,7 @@ class _VetDetailsState extends State<VetDetails> {
                       height: 14,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         GestureDetector(
                           child: VetDetailCard(
