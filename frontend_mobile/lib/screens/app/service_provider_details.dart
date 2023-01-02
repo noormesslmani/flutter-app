@@ -159,6 +159,55 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
               ],
             ),
           ),
+          TabBar(
+            unselectedLabelColor: Colors.grey,
+            labelColor: Theme.of(context).primaryColor,
+            indicatorColor: Theme.of(context).primaryColor,
+            tabs: const [
+              Tab(
+                icon: Icon(
+                  Icons.person,
+                  size: 30,
+                ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.pets,
+                  size: 30,
+                ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.calendar_month,
+                  size: 30,
+                ),
+              ),
+            ],
+            controller: _tabController,
+            indicatorSize: TabBarIndicatorSize.tab,
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                Center(
+                  child: Text(
+                    'About',
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    'Services',
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    'Booking',
+                  ),
+                ),
+              ],
+              controller: _tabController,
+            ),
+          ),
         ],
       ),
     );
