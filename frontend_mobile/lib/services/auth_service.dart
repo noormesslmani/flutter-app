@@ -46,7 +46,6 @@ class AuthService with ChangeNotifier {
       notifyListeners();
     } catch (error) {
       debugPrint(error.toString());
-
       rethrow;
     }
   }
@@ -92,7 +91,7 @@ class AuthService with ChangeNotifier {
     }
   }
 
-  Future<void> signUpWithFireBase(
+  static Future<void> signUpWithFireBase(
       String email, String password, VoidCallback onSuccess) async {
     try {
       final newUser =
