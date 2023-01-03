@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/text_expand.dart';
 
@@ -23,10 +25,17 @@ class _AboutState extends State<About> {
     'assets/images/pet-dog.jpeg',
     'assets/images/pet-dog.jpeg',
   ];
+  List<String> services = [
+    'assets/images/walk.png',
+    'assets/images/dog.png',
+    'assets/images/bath.png',
+    'assets/images/pet-boarding.png',
+  ];
+  List<String> servicesName = ['Training', 'Walking', 'Grooming', 'Boarding'];
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 30),
       child: ListView(
         children: [
           Text(
@@ -62,6 +71,57 @@ class _AboutState extends State<About> {
             height: 15,
           ),
           Text(
+            'Services',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .apply(color: Theme.of(context).primaryColorDark),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          SizedBox(
+            height: 90,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: services.map((service) {
+                return Card(
+                  elevation: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(7.0),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          service,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              servicesName[services.indexOf(service)],
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text("10 usd/h",
+                                style: Theme.of(context).textTheme.bodySmall),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Text(
             'Accepted Pets',
             style: Theme.of(context)
                 .textTheme
@@ -78,9 +138,9 @@ class _AboutState extends State<About> {
               children: animals.map((pet) {
                 return Padding(
                   padding: const EdgeInsets.all(7.0),
-                  child: (Image.asset(
+                  child: Image.asset(
                     pet,
-                  )),
+                  ),
                 );
               }).toList(),
             ),
