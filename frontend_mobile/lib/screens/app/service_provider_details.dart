@@ -3,6 +3,8 @@ import 'package:frontend_mobile/widgets/buttons/favorite_button.dart';
 import 'package:frontend_mobile/widgets/buttons/chat_button.dart';
 import 'package:frontend_mobile/widgets/cards/vet_details_card.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:frontend_mobile/widgets/TabBarView/serviceProvider/about.dart';
+import 'package:frontend_mobile/widgets/TabBarView/serviceProvider/bookings.dart';
 
 class ServiceProviderDetails extends StatefulWidget {
   const ServiceProviderDetails({super.key});
@@ -22,7 +24,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
 
@@ -37,8 +39,8 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
               Image.asset(
                 "assets/images/pet-owner.jpg",
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.35,
-                fit: BoxFit.fitWidth,
+                height: MediaQuery.of(context).size.height * 0.3,
+                fit: BoxFit.contain,
               ),
               Padding(
                 padding:
@@ -172,12 +174,6 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
               ),
               Tab(
                 icon: Icon(
-                  Icons.pets,
-                  size: 30,
-                ),
-              ),
-              Tab(
-                icon: Icon(
                   Icons.calendar_month,
                   size: 30,
                 ),
@@ -188,24 +184,11 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
           ),
           Expanded(
             child: TabBarView(
-              children: [
-                Center(
-                  child: Text(
-                    'About',
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    'Services',
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    'Booking',
-                  ),
-                ),
-              ],
               controller: _tabController,
+              children: const [
+                About(),
+                Bookings(),
+              ],
             ),
           ),
         ],
