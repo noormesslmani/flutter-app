@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/widgets/cards/service_type_card.dart';
+import 'package:frontend_mobile/widgets/pressables/service_type_card.dart';
 import 'package:frontend_mobile/utilities/serviceCard.dart';
-import 'package:frontend_mobile/widgets/cards/vet_card.dart';
-import 'package:frontend_mobile/widgets/cards/service_provider_card.dart';
+import 'package:frontend_mobile/widgets/pressables/vet_card.dart';
+import 'package:frontend_mobile/widgets/pressables/service_provider_card.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

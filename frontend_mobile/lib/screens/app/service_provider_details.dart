@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:frontend_mobile/widgets/TabBarView/serviceProvider/about.dart';
 import 'package:frontend_mobile/widgets/TabBarView/serviceProvider/bookings.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:frontend_mobile/widgets/cards/inkwell_icons.dart';
+import 'package:frontend_mobile/widgets/pressables/inkwell_icons.dart';
 
 class ServiceProviderDetails extends StatefulWidget {
   const ServiceProviderDetails({super.key});

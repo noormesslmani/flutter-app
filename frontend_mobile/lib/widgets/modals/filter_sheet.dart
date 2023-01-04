@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/slider.dart';
 import 'package:frontend_mobile/widgets/buttons/sort_by_button.dart';
-import 'package:frontend_mobile/widgets/cards/rating_card.dart';
+import 'package:frontend_mobile/widgets/pressables/rating_card.dart';
 
 class FilterSheet extends StatelessWidget {
   final Function setSortBy;

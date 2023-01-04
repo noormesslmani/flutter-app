@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/buttons/auth_button.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:frontend_mobile/widgets/cards/user_type.dart';
+import 'package:frontend_mobile/widgets/pressables/user_type.dart';
 import 'package:frontend_mobile/services/auth_service.dart';
 import 'package:frontend_mobile/widgets/app_bar.dart';
 
@@ -20,7 +20,6 @@ class _SignUp3State extends State<SignUp3> {
     final user =
         ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: CustomAppBar(
         title: 'User Type',
         appBar: AppBar(),
@@ -81,8 +80,8 @@ class _SignUp3State extends State<SignUp3> {
                 AuthButton(
                   label: 'Create Account',
                   width: double.infinity,
-                  handlePress: (() {
-                    AuthService().signUpWithFireBase(
+                  handlePress: (() async {
+                    await AuthService.signUpWithFireBase(
                       user['email'].toString(),
                       user['password'].toString(),
                       () {

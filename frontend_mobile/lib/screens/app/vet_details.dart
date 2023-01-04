@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/text_expand.dart';
 import 'package:horizontal_calendar/horizontal_calendar.dart';
-import 'package:frontend_mobile/widgets/cards/appointment_slot.dart';
+import 'package:frontend_mobile/widgets/pressables/appointment_slot.dart';
 import 'package:frontend_mobile/widgets/dialogs/confirm_dialog.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:frontend_mobile/widgets/buttons/chat_button.dart';
 import 'package:frontend_mobile/widgets/buttons/favorite_button.dart';
-import 'package:frontend_mobile/widgets/cards/inkwell_icons.dart';
+import 'package:frontend_mobile/widgets/pressables/inkwell_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class VetDetails extends StatefulWidget {

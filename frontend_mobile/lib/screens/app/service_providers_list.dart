@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/widgets/cards/vet_card.dart';
-import 'package:frontend_mobile/widgets/cards/service_provider_card.dart';
+import 'package:frontend_mobile/widgets/pressables/vet_card.dart';
+import 'package:frontend_mobile/widgets/pressables/service_provider_card.dart';
 import 'package:frontend_mobile/widgets/input.dart';
 import 'package:frontend_mobile/widgets/app_bar.dart';
 import 'package:frontend_mobile/widgets/modals/filter_sheet.dart';

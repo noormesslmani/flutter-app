@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:horizontal_calendar/horizontal_calendar.dart';
-import 'package:frontend_mobile/widgets/cards/appointment_slot.dart';
+import 'package:frontend_mobile/widgets/pressables/appointment_slot.dart';
 import 'package:frontend_mobile/widgets/dialogs/confirm_dialog.dart';
 
 class Bookings extends StatefulWidget {
