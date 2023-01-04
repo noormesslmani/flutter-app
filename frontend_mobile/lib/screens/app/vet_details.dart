@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_mobile/widgets/cards/vet_details_card.dart';
 import 'package:frontend_mobile/widgets/text_expand.dart';
 import 'package:horizontal_calendar/horizontal_calendar.dart';
 import 'package:frontend_mobile/widgets/cards/appointment_slot.dart';
@@ -7,6 +6,8 @@ import 'package:frontend_mobile/widgets/dialogs/confirm_dialog.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:frontend_mobile/widgets/buttons/chat_button.dart';
 import 'package:frontend_mobile/widgets/buttons/favorite_button.dart';
+import 'package:frontend_mobile/widgets/cards/inkwell_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VetDetails extends StatefulWidget {
   const VetDetails({super.key});
@@ -26,6 +27,15 @@ class _VetDetailsState extends State<VetDetails> {
     '11:00-12:00',
     '12:00-13:00'
   ];
+  _makingPhoneCall() async {
+    var url = Uri.parse("tel:9776765434");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   final List<LatLng> locations = <LatLng>[
     const LatLng(33.557069, 35.372948),
   ];
@@ -124,7 +134,7 @@ class _VetDetailsState extends State<VetDetails> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -146,33 +156,31 @@ class _VetDetailsState extends State<VetDetails> {
                       height: 14,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          child: VetDetailCard(
-                            icon: Icon(
-                              Icons.star,
-                              color: Colors.yellow[700],
-                              size: 30,
-                            ),
-                            text: '4.5/5',
-                            title: 'Rating',
+                        InkwellIcon(
+                          icon: Icon(
+                            Icons.phone,
+                            size: 25.0,
+                            color: Theme.of(context).primaryColor,
                           ),
+                          onTap: _makingPhoneCall,
+                          color: Theme.of(context).primaryColor,
                         ),
-                        GestureDetector(
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        InkwellIcon(
+                          icon: Icon(
+                            Icons.location_pin,
+                            size: 25.0,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed("/maps", arguments: locations);
                           },
-                          child: VetDetailCard(
-                            icon: Icon(
-                              Icons.location_pin,
-                              color: Theme.of(context).colorScheme.secondary,
-                              size: 30,
-                            ),
-                            text: '3 Km',
-                            title: 'Location',
-                          ),
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ],
                     ),
