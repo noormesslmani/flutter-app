@@ -6,6 +6,7 @@ import 'package:frontend_mobile/widgets/TabBarView/serviceProvider/about.dart';
 import 'package:frontend_mobile/widgets/TabBarView/serviceProvider/bookings.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:frontend_mobile/widgets/pressables/inkwell_icons.dart';
+import 'package:frontend_mobile/widgets/TabBarView/reviews.dart';
 
 class ServiceProviderDetails extends StatefulWidget {
   const ServiceProviderDetails({super.key});
@@ -42,8 +43,14 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -200,16 +207,13 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
               indicatorColor: Theme.of(context).primaryColor,
               tabs: const [
                 Tab(
-                  icon: Icon(
-                    Icons.person,
-                    size: 30,
-                  ),
+                  text: 'About',
                 ),
                 Tab(
-                  icon: Icon(
-                    Icons.calendar_month,
-                    size: 30,
-                  ),
+                  text: 'Bookings',
+                ),
+                Tab(
+                  text: 'Reviews',
                 ),
               ],
               controller: _tabController,
@@ -221,6 +225,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
                 children: const [
                   About(),
                   Bookings(),
+                  Reviews(),
                 ],
               ),
             ),
