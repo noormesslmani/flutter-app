@@ -36,6 +36,15 @@ class _VetDetailsState extends State<VetDetails> {
     }
   }
 
+  _openEmail() async {
+    var url = Uri.parse("mailto:noormsl95@gmail.com");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   final List<LatLng> locations = <LatLng>[
     const LatLng(33.557069, 35.372948),
   ];
@@ -181,6 +190,21 @@ class _VetDetailsState extends State<VetDetails> {
                                 .pushNamed("/maps", arguments: locations);
                           },
                           color: Theme.of(context).colorScheme.secondary,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        InkwellIcon(
+                          icon: Icon(
+                            Icons.email_outlined,
+                            size: 25.0,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onTap: _openEmail,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        const SizedBox(
+                          width: 5,
                         ),
                       ],
                     ),

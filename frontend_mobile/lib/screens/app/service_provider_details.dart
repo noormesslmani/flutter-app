@@ -31,6 +31,15 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
     }
   }
 
+  _openEmail() async {
+    var url = Uri.parse("mailto:noormsl95@gmail.com");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
@@ -147,7 +156,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
                 InkwellIcon(
                   icon: Icon(
                     Icons.phone,
-                    size: 25.0,
+                    size: 20.0,
                     color: Theme.of(context).primaryColor,
                   ),
                   onTap: _makingPhoneCall,
@@ -158,8 +167,20 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
                 ),
                 InkwellIcon(
                   icon: Icon(
+                    Icons.email_outlined,
+                    size: 20.0,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                  onTap: _openEmail,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                InkwellIcon(
+                  icon: Icon(
                     Icons.location_pin,
-                    size: 25.0,
+                    size: 20.0,
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                   onTap: () {
@@ -169,6 +190,9 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails>
                   color: Theme.of(context).colorScheme.secondary,
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 10,
             ),
             TabBar(
               unselectedLabelColor: Colors.grey,
