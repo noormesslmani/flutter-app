@@ -10,6 +10,7 @@ class FavoriteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: 'like',
       backgroundColor: Colors.white,
       onPressed: onPressed,
       child: Icon(

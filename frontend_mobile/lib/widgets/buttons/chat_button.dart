@@ -7,6 +7,7 @@ class ChatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: 'chat',
       onPressed: onPressed,
       child: const Icon(
         Icons.chat_bubble,
