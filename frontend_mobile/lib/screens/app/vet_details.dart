@@ -8,6 +8,7 @@ import 'package:frontend_mobile/widgets/buttons/chat_button.dart';
 import 'package:frontend_mobile/widgets/buttons/favorite_button.dart';
 import 'package:frontend_mobile/widgets/pressables/inkwell_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:frontend_mobile/widgets/buttons/icon_label_button.dart';
 
 class VetDetails extends StatefulWidget {
   const VetDetails({super.key});
@@ -292,21 +293,6 @@ class _VetDetailsState extends State<VetDetails> {
                                           _selectedIndex = index;
                                         });
                                       },
-                                      onDoubleTap: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return StatefulBuilder(
-                                              builder: (BuildContext context,
-                                                  StateSetter setState) {
-                                                return const ConfirmDialig(
-                                                    text:
-                                                        'Are you sure you want to book the appointment?');
-                                              },
-                                            );
-                                          },
-                                        );
-                                      },
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 5),
@@ -318,6 +304,36 @@ class _VetDetailsState extends State<VetDetails> {
                                       ),
                                     );
                                   }),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 5),
+                            child: IconLabelButton(
+                              icon: const Icon(
+                                Icons.calendar_month,
+                                size: 26,
+                              ),
+                              onPressed: _selectedIndex != null
+                                  ? () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return StatefulBuilder(
+                                            builder: (BuildContext context,
+                                                StateSetter setState) {
+                                              return const ConfirmDialig(
+                                                  text:
+                                                      'Are you sure you want to book the appointment?');
+                                            },
+                                          );
+                                        },
+                                      );
+                                    }
+                                  : null,
+                              label: 'Book Appointment',
+                              backgroundColor: Theme.of(context).primaryColor,
+                              minimumSize: const Size(double.infinity, 50),
                             ),
                           ),
                         ],

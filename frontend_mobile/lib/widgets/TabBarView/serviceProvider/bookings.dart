@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:horizontal_calendar/horizontal_calendar.dart';
 import 'package:frontend_mobile/widgets/pressables/appointment_slot.dart';
 import 'package:frontend_mobile/widgets/dialogs/confirm_dialog.dart';
+import 'package:frontend_mobile/widgets/buttons/icon_label_button.dart';
 
 class Bookings extends StatefulWidget {
   const Bookings({super.key});
@@ -79,6 +80,35 @@ class _BookingsState extends State<Bookings> {
                   )
                   .toList(),
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+          child: IconLabelButton(
+            icon: const Icon(
+              Icons.calendar_month,
+              size: 26,
+            ),
+            onPressed: _selectedIndex != null
+                ? () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return StatefulBuilder(
+                          builder:
+                              (BuildContext context, StateSetter setState) {
+                            return const ConfirmDialig(
+                                text:
+                                    'Are you sure you want to book the appointment?');
+                          },
+                        );
+                      },
+                    );
+                  }
+                : null,
+            label: 'Book Appointment',
+            backgroundColor: Theme.of(context).primaryColor,
+            minimumSize: const Size(double.infinity, 50),
           ),
         ),
       ],
