@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:frontend_mobile/widgets/buttons/outlined_button.dart';
 
 class Reviews extends StatefulWidget {
   const Reviews({super.key});
@@ -68,21 +69,13 @@ class _ReviewsState extends State<Reviews> {
           ],
         ),
         Positioned(
-          left: MediaQuery.of(context).size.width * 0.325 - 10,
-          bottom: 5,
-          child: OutlinedButton(
-            onPressed: () {},
-            child: Text('Add Review'),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: Theme.of(context).primaryColor,
-              minimumSize: Size(MediaQuery.of(context).size.width * 0.35, 45),
-              side: BorderSide(color: Theme.of(context).primaryColor),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ),
-        ),
+            left: MediaQuery.of(context).size.width * 0.325 - 10,
+            bottom: 5,
+            child: OutlinedBtn(
+              label: 'AddReview',
+              minSize: Size(MediaQuery.of(context).size.width * 0.35, 45),
+              onPressed: () {},
+            )),
       ],
     );
   }
