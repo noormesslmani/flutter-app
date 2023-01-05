@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:frontend_mobile/widgets/text_expand.dart';
+import 'package:frontend_mobile/widgets/rating_bar.dart';
 
 class SingleReview extends StatefulWidget {
   const SingleReview({super.key});
@@ -45,25 +45,10 @@ class _SingleReviewState extends State<SingleReview> {
                       const SizedBox(
                         height: 5,
                       ),
-                      RatingBar(
-                        initialRating: 3.0,
-                        ignoreGestures: true,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemSize: 10,
-                        ratingWidget: RatingWidget(
-                          full: Icon(Icons.star, color: Colors.yellow[700]),
-                          half:
-                              Icon(Icons.star_half, color: Colors.yellow[700]),
-                          empty: Icon(Icons.star_border,
-                              color: Colors.yellow[700]),
-                        ),
-                        itemPadding:
-                            const EdgeInsets.symmetric(horizontal: 4.0),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
+                      const Rating(
+                        padding: 1,
+                        size: 10,
+                        readOnly: true,
                       ),
                     ],
                   ),

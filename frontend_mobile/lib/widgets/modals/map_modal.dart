@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:frontend_mobile/widgets/rating_bar.dart';
 
 class MapModal extends StatelessWidget {
   final String name;
@@ -51,26 +51,11 @@ class MapModal extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    RatingBar(
+                    Rating(
                       initialRating: rating,
-                      allowHalfRating: true,
-                      ignoreGestures: true,
-                      itemSize: 25,
-                      ratingWidget: RatingWidget(
-                        full: const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        half: const Icon(
-                          Icons.star_half,
-                          color: Colors.amber,
-                        ),
-                        empty: const Icon(
-                          Icons.star_border,
-                          color: Colors.amber,
-                        ),
-                      ),
-                      onRatingUpdate: (value) {},
+                      padding: 1,
+                      size: 25,
+                      readOnly: true,
                     ),
                     const SizedBox(
                       height: 10,

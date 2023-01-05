@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:frontend_mobile/widgets/buttons/outlined_button.dart';
 import 'package:frontend_mobile/widgets/cards/review.dart';
+import 'package:frontend_mobile/widgets/rating_bar.dart';
 
 class Reviews extends StatefulWidget {
   const Reviews({super.key});
@@ -29,23 +29,11 @@ class _ReviewsState extends State<Reviews> {
             const SizedBox(
               height: 10,
             ),
-            Center(
-              child: RatingBar(
-                initialRating: 3.0,
-                ignoreGestures: true,
-                direction: Axis.horizontal,
-                allowHalfRating: true,
-                itemCount: 5,
-                itemSize: 50,
-                ratingWidget: RatingWidget(
-                  full: Icon(Icons.star, color: Colors.yellow[700]),
-                  half: Icon(Icons.star_half, color: Colors.yellow[700]),
-                  empty: Icon(Icons.star_border, color: Colors.yellow[700]),
-                ),
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                onRatingUpdate: (rating) {
-                  print(rating);
-                },
+            const Center(
+              child: Rating(
+                padding: 4,
+                size: 50,
+                readOnly: true,
               ),
             ),
             const SizedBox(
