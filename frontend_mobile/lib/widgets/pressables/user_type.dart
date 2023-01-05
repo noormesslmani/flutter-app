@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TypeCard extends StatefulWidget {
+class TypeCard extends StatelessWidget {
   final String type;
   final Color color;
   final ImageProvider<Object> image;
@@ -16,18 +16,13 @@ class TypeCard extends StatefulWidget {
   });
 
   @override
-  State<TypeCard> createState() => _TypeCardState();
-}
-
-class _TypeCardState extends State<TypeCard> {
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: onTap,
       child: Opacity(
-        opacity: widget.opacity,
+        opacity: opacity,
         child: Card(
-          color: widget.color,
+          color: color,
           child: SizedBox(
             width: double.infinity,
             height: 100,
@@ -37,11 +32,11 @@ class _TypeCardState extends State<TypeCard> {
                   height: 100,
                   width: 120,
                   child: Image(
-                    image: widget.image,
+                    image: image,
                   ),
                 ),
                 Text(
-                  widget.type,
+                  type,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
