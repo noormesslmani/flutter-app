@@ -19,9 +19,9 @@ class OutlinedBtn extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
-        foregroundColor: Theme.of(context).primaryColor,
+        backgroundColor: color ?? Theme.of(context).primaryColor,
+        foregroundColor: Colors.white,
         minimumSize: minSize,
-        side: BorderSide(color: color ?? Theme.of(context).primaryColor),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 20),
         ),
