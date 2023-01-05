@@ -34,15 +34,12 @@ class AuthService with ChangeNotifier {
       Provider.of<Auth>(
         context,
         listen: false,
-      ).setUser(
-        CurrentUser.fromJson(data),
-      );
+      ).setUser = CurrentUser.fromJson(data);
+
       Provider.of<Auth>(
         context,
         listen: false,
-      ).setToken(
-        data["token"],
-      );
+      ).setToken = data["token"];
       notifyListeners();
     } catch (error) {
       debugPrint(error.toString());
@@ -76,15 +73,13 @@ class AuthService with ChangeNotifier {
       Provider.of<Auth>(
         context,
         listen: false,
-      ).setUser(
-        CurrentUser.fromJson(data),
-      );
+      ).setUser = CurrentUser.fromJson(data);
+
       Provider.of<Auth>(
         context,
         listen: false,
-      ).setToken(
-        data["token"],
-      );
+      ).setToken = data["token"];
+
       notifyListeners();
     } catch (error) {
       rethrow;

@@ -30,12 +30,12 @@ class Auth with ChangeNotifier {
     return _user;
   }
 
-  void setUser(CurrentUser user) {
+  set setUser(CurrentUser user) {
     _user = user;
     notifyListeners();
   }
 
-  void setToken(String token) {
+  set setToken(String token) {
     _token = token;
     notifyListeners();
   }
