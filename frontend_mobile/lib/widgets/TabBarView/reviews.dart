@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:frontend_mobile/widgets/buttons/outlined_button.dart';
+import 'package:frontend_mobile/widgets/cards/review.dart';
 
 class Reviews extends StatefulWidget {
   const Reviews({super.key});
@@ -66,16 +67,23 @@ class _ReviewsState extends State<Reviews> {
             const Divider(
               color: Colors.grey,
             ),
+            const SingleReview(),
+            const SingleReview(),
+            const SingleReview(),
+            const SizedBox(
+              height: 30,
+            ),
           ],
         ),
         Positioned(
-            left: MediaQuery.of(context).size.width * 0.325 - 10,
-            bottom: 5,
-            child: OutlinedBtn(
-              label: 'AddReview',
-              minSize: Size(MediaQuery.of(context).size.width * 0.35, 45),
-              onPressed: () {},
-            )),
+          left: MediaQuery.of(context).size.width * 0.325 - 10,
+          bottom: 5,
+          child: OutlinedBtn(
+            label: 'AddReview',
+            minSize: Size(MediaQuery.of(context).size.width * 0.35, 45),
+            onPressed: () {},
+          ),
+        ),
       ],
     );
   }
