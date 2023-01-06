@@ -7,11 +7,10 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:geolocator/geolocator.dart';
+import 'package:frontend_mobile/widgets/modals/map_modal.dart';
 
 class MapUtilities {
-  
   Uint8List? byteData;
-
 
   static Future<Position> determinePosition() async {
     bool serviceEnabled;
@@ -96,5 +95,20 @@ class MapUtilities {
             (1 - cos((location2.longitude - location1.longitude) * p)) /
             2;
     return 12742 * asin(sqrt(a));
+  }
+
+  static showUserCard<Widget>(
+    String distance,
+    String duration,
+    void Function()? onButtonPress,
+  ) {
+    return MapCard(
+      distance: distance,
+      duration: duration,
+      name: 'Dr Nour Messlmani',
+      onArrowPress: () {},
+      onButtonPress: onButtonPress,
+      rating: 4,
+    );
   }
 }
