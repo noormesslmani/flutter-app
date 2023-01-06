@@ -57,6 +57,9 @@ class MapUtilities {
       LatLng? initialLocation,
       List<LatLng> polylineCoordinates,
       LatLng locations) async {
+    if (initialLocation == null) {
+      return;
+    }
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       dotenv.env['GOOGLE_MAPS_API_KEY'].toString(),
       PointLatLng(initialLocation!.latitude, initialLocation!.longitude),

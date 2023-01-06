@@ -16,7 +16,8 @@ class Maps extends StatefulWidget {
 class MapsState extends State<Maps> {
   Set<Marker> markers = {};
   Uint8List? byteData;
-  LatLng? _initialLocation;
+  LatLng? _currentLocation;
+  LatLng defaultLocation = const LatLng(33.888630, 35.495480);
   PolylinePoints polylinePoints = PolylinePoints();
   List<LatLng> polylineCoordinates = [];
   Map<PolylineId, Polyline> polylines = {};
@@ -24,7 +25,7 @@ class MapsState extends State<Maps> {
   String _duration = '';
   bool _showCard = false;
   LatLng? _pressedLocation;
-
+  GoogleMapController? mapController;
   @override
   void initState() {
     getBytesFromAsset("assets/images/pin4.png", 100);
@@ -33,23 +34,25 @@ class MapsState extends State<Maps> {
   }
 
   void getBytesFromAsset(String path, int width) async {
-    setState(() async {
-      byteData = await MapUtilities().getBytesFromAsset(path, width);
-    });
+    await MapUtilities().getBytesFromAsset(path, width).then(
+      (value) {
+        setState(() {
+          byteData = value;
+        });
+      },
+    );
   }
 
-  void setInitialLocation() async {
+  Future<void> setInitialLocation() async {
     debugPrint('loading');
     try {
       await MapUtilities.determinePosition().then(((value) {
         setState(() {
-          _initialLocation = LatLng(value.latitude, value.longitude);
+          _currentLocation = LatLng(value.latitude, value.longitude);
         });
       }));
     } catch (error) {
-      setState(() {
-        _initialLocation = const LatLng(33.888630, 35.495480);
-      });
+      print(error);
     }
   }
 
@@ -57,12 +60,17 @@ class MapsState extends State<Maps> {
   Widget build(BuildContext context) {
     final locations =
         ModalRoute.of(context)?.settings.arguments as List<LatLng>;
-    void onMapcreated(GoogleMapController controller) async {
+
+    // void onMapcreated(GoogleMapController controller) {}
+    Set<Marker> getmarkers() {
       setState(
         () {
           for (int i = 0; i < locations.length; i++) {
             markers.add(
               Marker(
+                markerId: MarkerId(i.toString()),
+                icon: BitmapDescriptor.fromBytes(byteData!),
+                position: locations[i],
                 onTap: () async {
                   setState(() {
                     _showCard = false;
@@ -70,7 +78,7 @@ class MapsState extends State<Maps> {
                   polylineCoordinates.clear();
                   try {
                     await LocationService.getDistanceMatrix(
-                            locations[i], _initialLocation!)
+                            locations[i], _currentLocation!)
                         .then(
                       (value) {
                         setState(() {
@@ -84,22 +92,22 @@ class MapsState extends State<Maps> {
                     );
                   } catch (e) {
                     debugPrint(e.toString());
+                    setState(() {
+                      _distance = 'N/A';
+                      _duration = 'N/A';
+                      _pressedLocation = locations[i];
+                    });
                   }
                   setState(() {
                     _showCard = true;
                   });
                 },
-                markerId: MarkerId(i.toString()),
-                icon: BitmapDescriptor.fromBytes(byteData!),
-                position: locations[i],
-                infoWindow: InfoWindow(
-                  title: 'Location: $i',
-                ),
               ),
             );
           }
         },
       );
+      return markers;
     }
 
     return Scaffold(
@@ -108,49 +116,52 @@ class MapsState extends State<Maps> {
         title: 'Maps',
         showBack: true,
       ),
-      body: _initialLocation != null
-          ? Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                GoogleMap(
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          byteData != null
+              ? GoogleMap(
                   polylines: Set<Polyline>.of(polylines.values),
                   mapType: MapType.normal,
-                  markers: markers,
+                  markers: getmarkers(),
                   myLocationEnabled: true,
                   myLocationButtonEnabled: true,
                   compassEnabled: true,
                   initialCameraPosition: CameraPosition(
-                    target: _initialLocation!,
+                    target: _currentLocation ?? defaultLocation,
                     zoom: 12,
                   ),
-                  onMapCreated: onMapcreated,
+                  onMapCreated: ((controller) {
+                    setState(() {
+                      mapController = controller;
+                    });
+                  }),
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: _showCard
-                      ? MapUtilities.showUserCard(
-                          _distance,
-                          _duration,
-                          () async {
-                            await MapUtilities.getRoute(
-                              polylinePoints,
-                              _initialLocation,
-                              polylineCoordinates,
-                              _pressedLocation!,
-                            );
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: _showCard
+                ? MapUtilities.showUserCard(
+                    _distance,
+                    _duration,
+                    () async {
+                      await MapUtilities.getRoute(
+                        polylinePoints,
+                        _currentLocation,
+                        polylineCoordinates,
+                        _pressedLocation!,
+                      );
 
-                            MapUtilities.addPolyLine(
-                                polylineCoordinates, polylines);
-                            setState(() {});
-                          },
-                        )
-                      : const SizedBox.shrink(),
-                ),
-              ],
-            )
-          : const Center(
-              child: CircularProgressIndicator(),
-            ),
+                      MapUtilities.addPolyLine(polylineCoordinates, polylines);
+                      setState(() {});
+                    },
+                  )
+                : const SizedBox.shrink(),
+          ),
+        ],
+      ),
     );
   }
 }
