@@ -22,6 +22,9 @@ class MapsState extends State<Maps> {
   Map<PolylineId, Polyline> polylines = {};
   String _distance = '';
   String _duration = '';
+  bool _showCard = false;
+  LatLng? _pressedLocation;
+
   @override
   void initState() {
     getBytesFromAsset("assets/images/pin4.png", 100);
@@ -61,6 +64,10 @@ class MapsState extends State<Maps> {
             markers.add(
               Marker(
                 onTap: () async {
+                  setState(() {
+                    _showCard = false;
+                  });
+                  polylineCoordinates.clear();
                   try {
                     await LocationService.getDistanceMatrix(
                             locations[i], _initialLocation!)
@@ -71,41 +78,16 @@ class MapsState extends State<Maps> {
                               value!.rows![0].elements![0].distance!.text!;
                           _duration =
                               value.rows![0].elements![0].duration!.text!;
+                          _pressedLocation = locations[i];
                         });
                       },
                     );
                   } catch (e) {
                     debugPrint(e.toString());
                   }
-
-                  showModalBottomSheet<void>(
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      ),
-                    ),
-                    builder: (BuildContext context) {
-                      return MapModal(
-                        distance: _distance,
-                        duration: _duration,
-                        name: 'Dr Nour Messlmani',
-                        onArrowPress: () {},
-                        onButtonPress: () async {
-                          await MapUtilities.getRoute(
-                            polylinePoints,
-                            _initialLocation,
-                            polylineCoordinates,
-                            locations[i],
-                          );
-                          MapUtilities.addPolyLine(
-                              polylineCoordinates, polylines);
-                          setState(() {});
-                        },
-                        rating: 4,
-                      );
-                    },
-                  );
+                  setState(() {
+                    _showCard = true;
+                  });
                 },
                 markerId: MarkerId(i.toString()),
                 icon: BitmapDescriptor.fromBytes(byteData!),
@@ -127,18 +109,44 @@ class MapsState extends State<Maps> {
         showBack: true,
       ),
       body: _initialLocation != null
-          ? GoogleMap(
-              polylines: Set<Polyline>.of(polylines.values),
-              mapType: MapType.normal,
-              markers: markers,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              compassEnabled: true,
-              initialCameraPosition: CameraPosition(
-                target: _initialLocation!,
-                zoom: 12,
-              ),
-              onMapCreated: onMapcreated,
+          ? Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                GoogleMap(
+                  polylines: Set<Polyline>.of(polylines.values),
+                  mapType: MapType.normal,
+                  markers: markers,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
+                  compassEnabled: true,
+                  initialCameraPosition: CameraPosition(
+                    target: _initialLocation!,
+                    zoom: 12,
+                  ),
+                  onMapCreated: onMapcreated,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: _showCard
+                      ? MapUtilities.showUserCard(
+                          _distance,
+                          _duration,
+                          () async {
+                            await MapUtilities.getRoute(
+                              polylinePoints,
+                              _initialLocation,
+                              polylineCoordinates,
+                              _pressedLocation!,
+                            );
+
+                            MapUtilities.addPolyLine(
+                                polylineCoordinates, polylines);
+                            setState(() {});
+                          },
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              ],
             )
           : const Center(
               child: CircularProgressIndicator(),
