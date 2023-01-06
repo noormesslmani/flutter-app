@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_mobile/widgets/rating_bar.dart';
 
-class MapModal extends StatelessWidget {
+class MapCard extends StatelessWidget {
   final String name;
   final double rating;
   final void Function()? onButtonPress;
   final void Function()? onArrowPress;
   final String distance;
   final String duration;
-  const MapModal(
+  const MapCard(
       {required this.name,
       required this.onArrowPress,
       required this.onButtonPress,
@@ -19,7 +19,11 @@ class MapModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
       width: MediaQuery.of(context).size.width,
       height: 200,
       child: Padding(
@@ -61,39 +65,31 @@ class MapModal extends StatelessWidget {
                       height: 10,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.location_pin,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer,
-                            ),
-                            Text(
-                              distance,
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                          ],
+                        Icon(
+                          Icons.location_pin,
+                          color:
+                              Theme.of(context).colorScheme.secondaryContainer,
                         ),
-                        const SizedBox(
-                          width: 20,
+                        Text(
+                          distance,
+                          style: Theme.of(context).textTheme.labelMedium,
                         ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.directions_car,
-                              color: Colors.grey,
-                            ),
-                            Text(
-                              duration,
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                          ],
-                        )
                       ],
                     ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.directions_car,
+                          color: Colors.grey,
+                        ),
+                        Text(
+                          duration,
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      ],
+                    )
                   ],
                 ),
                 ElevatedButton.icon(
